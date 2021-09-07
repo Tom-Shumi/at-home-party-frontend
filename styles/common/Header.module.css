@@ -23,11 +23,10 @@
   padding: 0 40px;
   position: relative;
   color: #000000;
-  text-decoration: none;
   cursor: pointer;
 }
 
-.bgCategoryLi ::after {
+.aTag::after {
   position: absolute;
   bottom: -5px;
   left: 0;
@@ -40,23 +39,30 @@
   transition: transform 0.75s;
 }
 
-.bgCategoryLi :hover::after {
+.aTag:hover::after {
   transform: scale(1, 1);
 }
 
-.categoryLi ::after {
+.hoverBlock :hover > .smCategoryUl {
+  visibility: visible;
+}
+
+.smCategoryUl {
+  visibility: hidden;
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: #000000;
-  transform: scale(0, 1);
-  transform-origin: center top;
-  transition: transform 0.75s;
+  list-style: none;
+  padding: 0;
+  width: 125px;
+  text-align: center;
+  border: solid 1px silver;
 }
 
-.categoryLi :hover::after {
-  transform: scale(1, 1);
+.smCategoryLi {
+  padding: 0;
+  margin: 0;
+  border: solid 1px silver;
+  background-color: white;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
 }

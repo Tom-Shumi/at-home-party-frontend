@@ -14,14 +14,17 @@ const Header: React.FC<HeaderProps> = (props) => {
             <Image src={Icon} alt="アイコン" />
             <nav className={styles.nav}>
                 <ul className={styles.bgCategoryUl}>
-                    <li className={styles.bgCategoryLi}><a className={styles.aTag}>DRINK</a></li>
+                    <div className={styles.hoverBlock}>
+                        <li className={styles.bgCategoryLi}><a className={styles.aTag}>DRINK</a>
 
-                    <ul className={styles.smCategoryUl}>
-                        <li className={styles.smCategoryLi}><a>ビール</a></li>
-                        <li className={styles.smCategoryLi}><a>チューハイ</a></li>
-                        <li className={styles.smCategoryLi}><a>日本酒</a></li>
-                        <li className={styles.smCategoryLi}><a>ワイン</a></li>
-                    </ul>
+                            <ul className={styles.smCategoryUl}>
+                                <li className={styles.smCategoryLi}><a>ビール</a></li>
+                                <li className={styles.smCategoryLi}><a>チューハイ</a></li>
+                                <li className={styles.smCategoryLi}><a>日本酒</a></li>
+                                <li className={styles.smCategoryLi}><a>ワイン</a></li>
+                            </ul>
+                        </li>
+                    </div>
 
                     <li className={styles.categoryLi}><a className={styles.aTag}>SNACK</a></li>
                 </ul>
