@@ -3,15 +3,11 @@ import Icon from '/public/icon.png';
 import Beer from '/public/beer.png';
 import Image from 'next/image';
 
-interface HeaderProps {
-
-}
-
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: React.FC = () => {
     return (
         <header className={styles.header}>
-            <Image src={Beer} alt="アイコン" width={40} height={40} />
-            <Image src={Icon} alt="アイコン" />
+            <Image src={Beer} className={styles.icon} alt="アイコン" width={40} height={40} />
+            <Image src={Icon} className={styles.icon} alt="アイコン" />
             <nav className={styles.nav}>
                 <ul className={styles.bgCategoryUl}>
                     <div className={styles.hoverBlock}>

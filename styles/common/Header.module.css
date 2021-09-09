@@ -5,6 +5,10 @@
   display: -webkit-box;
 }
 
+.icon {
+  cursor: pointer;
+}
+
 .nav {
   margin: 0 0 0 auto;
 }
@@ -65,4 +69,8 @@
   height: 40px;
   line-height: 40px;
   cursor: pointer;
+}
+
+.smCategoryLi:hover {
+  background-color: lightyellow;
 }
