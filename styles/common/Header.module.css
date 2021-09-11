@@ -59,6 +59,7 @@
   width: 125px;
   text-align: center;
   border: solid 1px silver;
+  z-index: 999;
 }
 
 .smCategoryLi {
