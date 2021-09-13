@@ -1,0 +1,21 @@
+.drinkRankingDiv {
+  background-color: #FAFAFD;
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.rankingTitle {
+  font-family: neue-haas-grotesk-text, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  text-align: center;
+}
+
+.drinkRankingSelectedTabClassName {
+  background-color: lightyellow;
+}
+
+.drinkRankingSelectedTabPanelClassName {
+  background-color: lightyellow;
+  display: block;
+}

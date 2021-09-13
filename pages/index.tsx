@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Layout from 'components/common/Layout';
 import PickupDrink from 'components/home/PickupDrink';
+import DrinkRanking from 'components/home/DrinkRanking';
 import {apiClient} from 'utils/ApiUtils';
 import {env} from 'utils/EnvUtils';
 import { HomeInfo } from 'types/HomeInfo';
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
   return (
     <Layout title = "Home">
       <PickupDrink pickupDrinkList = {homeInfo.pickupDrinkList!}/>
+      <DrinkRanking/>
     </Layout>
   )
 }

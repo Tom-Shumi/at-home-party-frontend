@@ -23,7 +23,7 @@ const PickupDrink: React.FC<PickupDrinkProps> = (props) => {
     <>
       <Slider {...sliderSettings}>
         {(props.pickupDrinkList || []).map((pickupDrink, count) => (
-          <div key={'PickupDrinkDiv' + pickupDrink.id}>
+          <div key={'PickupDrinkDiv' + pickupDrink.id} className={styles.pickupDrinkDiv}>
             <Image key={'PickupDrink' + pickupDrink.id} src={pickupDrink.imageUrl} alt={"PickupDrink" + count} width={550} height={350} />
           </div>
         ))}
