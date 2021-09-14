@@ -11,11 +11,13 @@
   text-align: center;
 }
 
-.drinkRankingSelectedTabClassName {
-  background-color: lightyellow;
+.selectedTabClassName {
+  background: lightyellow;
+  border-color: #aaa;
+  color: black;
+  border-radius: 5px 5px 0 0;
 }
 
-.drinkRankingSelectedTabPanelClassName {
-  background-color: lightyellow;
-  display: block;
+.crownIcon {
+  margin-top: 7px !important;
 }

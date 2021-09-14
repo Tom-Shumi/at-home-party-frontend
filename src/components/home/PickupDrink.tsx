@@ -17,6 +17,7 @@ const PickupDrink: React.FC<PickupDrinkProps> = (props) => {
     pauseOnHover: true,
     infinite: true,
     speed: 500,
+    arrows: false
   };
 
   return (
