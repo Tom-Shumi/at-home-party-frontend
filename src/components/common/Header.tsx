@@ -3,6 +3,10 @@ import Icon from '/public/icon.png';
 import Beer from '/public/beer.png';
 import Image from 'next/image';
 import {backHome} from 'utils/CommonUtils';
+import BeerIcon from '/public/beer.png';
+import ChuhighIcon from '/public/chuhigh.png';
+import SakeIcon from '/public/sake.png';
+import WineIcon from '/public/wine.png';
 
 const Header: React.FC = () => {
     return (
@@ -15,10 +19,30 @@ const Header: React.FC = () => {
                         <li className={styles.bgCategoryLi}><a className={styles.aTag}>DRINK</a>
 
                             <ul className={styles.smCategoryUl}>
-                                <li className={styles.smCategoryLi}><a>ビール</a></li>
-                                <li className={styles.smCategoryLi}><a>チューハイ</a></li>
-                                <li className={styles.smCategoryLi}><a>日本酒</a></li>
-                                <li className={styles.smCategoryLi}><a>ワイン</a></li>
+                                <li className={styles.smCategoryLi}>
+                                    <a>
+                                        <Image src={BeerIcon} alt="Beer" width={20} height={20} />
+                                        ビール
+                                    </a>
+                                </li>
+                                <li className={styles.smCategoryLi}>
+                                    <a>
+                                        <Image src={ChuhighIcon} alt="Chuhigh" width={20} height={20} />
+                                        チューハイ
+                                    </a>
+                                </li>
+                                <li className={styles.smCategoryLi}>
+                                    <a>
+                                        <Image src={SakeIcon} alt="Sake" width={20} height={20} />
+                                        日本酒
+                                    </a>
+                                </li>
+                                <li className={styles.smCategoryLi}>
+                                    <a>
+                                        <Image src={WineIcon} alt="Wine" width={20} height={20} />
+                                        ワイン
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </div>

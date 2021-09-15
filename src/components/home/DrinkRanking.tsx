@@ -3,6 +3,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Image from 'next/image';
 import CrownIcon from '/public/crown.png';
+import BeerIcon from '/public/beer.png';
+import ChuhighIcon from '/public/chuhigh.png';
+import SakeIcon from '/public/sake.png';
+import WineIcon from '/public/wine.png';
+import DrinkRankingTable from 'components/home/DrinkRankingTable';
 
 interface DrinkRankingProps {
 
@@ -19,14 +24,26 @@ const DrinkRanking: React.FC<DrinkRankingProps> = (props) => {
       </h2>
       <Tabs selectedTabClassName={styles.selectedTabClassName}>
         <TabList>
-          <Tab>ビール</Tab>
-          <Tab>チューハイ</Tab>
-          <Tab>日本酒</Tab>
-          <Tab>ワイン</Tab>
+          <Tab>
+            <Image src={BeerIcon} alt="Beer" width={20} height={20} />
+            ビール
+          </Tab>
+          <Tab>
+            <Image src={ChuhighIcon} alt="Chuhigh" width={20} height={20} />
+            チューハイ
+          </Tab>
+          <Tab>
+            <Image src={SakeIcon} alt="Sake" width={20} height={20} />
+            日本酒
+          </Tab>
+          <Tab>
+            <Image src={WineIcon} alt="Wine" width={20} height={20} />
+            ワイン
+          </Tab>
         </TabList>
 
         <TabPanel>
-          <h3>Any content 1</h3>
+          <DrinkRankingTable />
         </TabPanel>
         <TabPanel>
           <h3>Any content 2</h3>

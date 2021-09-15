@@ -13,9 +13,10 @@
 
 .selectedTabClassName {
   background: lightyellow;
-  border-color: #aaa;
+  border: 1px solid #aaa !important;
   color: black;
   border-radius: 5px 5px 0 0;
+  border-bottom: none !important;
 }
 
 .crownIcon {
