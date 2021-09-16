@@ -430,6 +430,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-stars@^2.2.1":
+  "integrity" "sha512-x0Z7+OsImFfBbHpLm/o3Z/q9qbapQbaSbKkozSIJXs6OAkFW5keA4Qw4MOjocdmhPPUYI6DDVSB0NOm0QmY+Xg=="
+  "resolved" "https://registry.npmjs.org/@types/react-stars/-/react-stars-2.2.1.tgz"
+  "version" "2.2.1"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-tabs@^2.3.3":
   "integrity" "sha512-iKnx10tskHi9gpsvEAAJGpytbZXfcCINCFsEeYd9QN0mW7kGcUzh8Llgul1IqmFbKigXI/l3H3ej8ljWak2grw=="
   "resolved" "https://registry.npmjs.org/@types/react-tabs/-/react-tabs-2.3.3.tgz"
@@ -3146,6 +3153,11 @@
     "json2mq" "^0.2.0"
     "lodash.debounce" "^4.0.8"
     "resize-observer-polyfill" "^1.5.0"
+
+"react-stars@^2.2.5":
+  "integrity" "sha1-kRhSAY4VdKD5osHfpPC8mvBxuSE="
+  "resolved" "https://registry.npmjs.org/react-stars/-/react-stars-2.2.5.tgz"
+  "version" "2.2.5"
 
 "react-tabs@^3.2.2":
   "integrity" "sha512-/o52eGKxFHRa+ssuTEgSM8qORnV4+k7ibW+aNQzKe+5gifeVz8nLxCrsI9xdRhfb0wCLdgIambIpb1qCxaMN+A=="

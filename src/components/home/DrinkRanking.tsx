@@ -8,9 +8,13 @@ import ChuhighIcon from '/public/chuhigh.png';
 import SakeIcon from '/public/sake.png';
 import WineIcon from '/public/wine.png';
 import DrinkRankingTable from 'components/home/DrinkRankingTable';
+import { Drink } from 'types/Drink';
 
 interface DrinkRankingProps {
-
+  beerRankingList: Drink[];
+  chuhighRankingList: Drink[];
+  sakeRankingList: Drink[];
+  wineRankingList: Drink[];
 }
 
 const DrinkRanking: React.FC<DrinkRankingProps> = (props) => {
@@ -43,7 +47,7 @@ const DrinkRanking: React.FC<DrinkRankingProps> = (props) => {
         </TabList>
 
         <TabPanel>
-          <DrinkRankingTable />
+          <DrinkRankingTable rankingList={props.beerRankingList} drinkTypeName="beer" />
         </TabPanel>
         <TabPanel>
           <h3>Any content 2</h3>

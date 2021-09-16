@@ -5,6 +5,6 @@ module.exports = {
   },
   reactStrictMode: true,
   images: {
-    domains: ['drive.google.com'],
+    domains: ['drive.google.com', 'images-fe.ssl-images-amazon.com'],
   },
 }

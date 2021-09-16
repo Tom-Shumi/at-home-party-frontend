@@ -24,7 +24,11 @@ const Home: React.FC = () => {
   return (
     <Layout title = "Home">
       <PickupDrink pickupDrinkList = {homeInfo.pickupDrinkList!}/>
-      <DrinkRanking/>
+      <DrinkRanking
+        beerRankingList = {homeInfo.beerRankingList!}
+        chuhighRankingList = {homeInfo.chuhighRankingList!}
+        sakeRankingList = {homeInfo.sakeRankingList!}
+        wineRankingList = {homeInfo.wineRankingList!}/>
     </Layout>
   )
 }
