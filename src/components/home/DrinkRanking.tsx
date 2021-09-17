@@ -9,6 +9,7 @@ import SakeIcon from '/public/sake.png';
 import WineIcon from '/public/wine.png';
 import DrinkRankingTable from 'components/home/DrinkRankingTable';
 import { Drink } from 'types/Drink';
+import dynamic from "next/dynamic";
 
 interface DrinkRankingProps {
   beerRankingList: Drink[];
@@ -63,4 +64,11 @@ const DrinkRanking: React.FC<DrinkRankingProps> = (props) => {
   )
 }
 
-export default DrinkRanking
+const DynamicDrinkRanking = dynamic(
+  {
+    loader: async () => DrinkRanking,
+  },
+  { ssr: false }
+);
+
+export default DynamicDrinkRanking;
