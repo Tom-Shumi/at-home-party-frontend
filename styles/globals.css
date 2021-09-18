@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.rankingColor1 {
+  background-color: lightgoldenrodyellow;
+}
+
+.rankingColor2 {
+  background-color: whitesmoke;
+}
+
+.rankingColor3 {
+  background-color: wheat;
+}

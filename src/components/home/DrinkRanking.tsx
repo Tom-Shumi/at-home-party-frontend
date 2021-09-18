@@ -51,13 +51,13 @@ const DrinkRanking: React.FC<DrinkRankingProps> = (props) => {
           <DrinkRankingTable rankingList={props.beerRankingList} drinkTypeName="beer" />
         </TabPanel>
         <TabPanel>
-          <h3>Any content 2</h3>
+          <DrinkRankingTable rankingList={props.chuhighRankingList} drinkTypeName="chuhigh" />
         </TabPanel>
         <TabPanel>
-          <h3>Any content 3</h3>
+          <DrinkRankingTable rankingList={props.sakeRankingList} drinkTypeName="sake" />
         </TabPanel>
         <TabPanel>
-          <h3>Any content 4</h3>
+          <DrinkRankingTable rankingList={props.wineRankingList} drinkTypeName="wine" />
         </TabPanel>
       </Tabs>
     </div>

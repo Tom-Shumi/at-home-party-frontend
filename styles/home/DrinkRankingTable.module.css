@@ -1,5 +1,6 @@
 .numberTh {
   width: 40px;
+  text-align: center;
 }
 
 .numberTd {
@@ -10,25 +11,15 @@
   width: 80px;
 }
 
+.nameTd {
+  width: 280px;
+}
+
 .starTd {
   width: 140px;
 }
 
-.rankingTr1 {
-  vertical-align: middle;
-  background-color: lightgoldenrodyellow;
-}
-
-.rankingTr2 {
-  vertical-align: middle;
-  background-color: whitesmoke;
-}
-
-.rankingTr3 {
-  vertical-align: middle;
-  background-color: wheat;
-}
-
-.rankingTr, .rankingTr4, .rankingTr5 {
+.rankingTr {
+  cursor: pointer;
   vertical-align: middle;
 }
