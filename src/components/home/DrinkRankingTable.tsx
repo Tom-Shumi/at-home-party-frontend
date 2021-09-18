@@ -3,6 +3,7 @@ import styles from '/styles/home/DrinkRankingTable.module.css';
 import { Drink } from 'types/Drink';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
+import {Constant} from 'components/Constant';
 
 interface DrinkRankingTableProps {
   rankingList: Drink[];
@@ -28,7 +29,7 @@ const DrinkRankingTable: React.FC<DrinkRankingTableProps> = (props) => {
           let color = "rankingColor" + (count + 1);
 
           return (
-            <tr key={props.drinkTypeName + "Ranking" + (count + 1)} className={styles.rankingTr + " " + color} >
+            <tr key={props.drinkTypeName + "Ranking" + (count + 1)} className={styles.rankingTr + Constant.CSS_JOIN + color} >
               <td className={styles.numberTd}>{count + 1}</td>
               <td className={styles.imageTd}>
                 {drink.infoUrl != null &&

@@ -9,6 +9,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+
     return (
         <div>
             <Head>
@@ -16,7 +17,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 <meta charSet='utf-8' />
                 <meta name='viewport' content='initial-scale=1.0, width=device-width' />
             </Head>
-            <Header />
+            <Header title={props.title}/>
             {props.children}
             <Footer />
         </div>

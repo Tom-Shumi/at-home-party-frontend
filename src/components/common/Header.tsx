@@ -7,8 +7,23 @@ import BeerIcon from '/public/beer.png';
 import ChuhighIcon from '/public/chuhigh.png';
 import SakeIcon from '/public/sake.png';
 import WineIcon from '/public/wine.png';
+import {Constant} from 'components/Constant';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    title: string;
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
+
+    let drinkColor = "black";
+    let snackColor = "black";
+
+    if (props.title == "Home") {
+        drinkColor = "blue";
+    } else if (props.title == "Snack") {
+        snackColor = "blue";
+    }
+
     return (
         <header className={styles.header}>
             <Image src={Beer} className={styles.icon} onClick={backHome} alt="アイコン" width={40} height={40} />
@@ -16,7 +31,7 @@ const Header: React.FC = () => {
             <nav className={styles.nav}>
                 <ul className={styles.bgCategoryUl}>
                     <div className={styles.hoverBlock}>
-                        <li className={styles.bgCategoryLi}><a className={styles.aTag}>DRINK</a>
+                        <li className={styles.bgCategoryLi}><a className={styles.aTag + Constant.CSS_JOIN + drinkColor}>DRINK</a>
 
                             <ul className={styles.smCategoryUl}>
                                 <li className={styles.smCategoryLi}>
@@ -47,7 +62,7 @@ const Header: React.FC = () => {
                         </li>
                     </div>
 
-                    <li className={styles.categoryLi}><a className={styles.aTag}>SNACK</a></li>
+                    <li className={styles.categoryLi}><a className={styles.aTag + " " + snackColor}>SNACK</a></li>
                 </ul>
             </nav>
         </header>
