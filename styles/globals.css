@@ -46,3 +46,48 @@ a {
 .contents {
   padding: 10px 10% 0px 10%;
 }
+
+.contentsLg {
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.contentsMd {
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.headingLg {
+  padding: 0.5em;
+  color: #494949;
+  background: #fffaf4;
+  border-left: solid 5px #ffaf58;
+}
+
+.headingMd {
+  padding: 0.25em 0.5em;
+  color: #494949;
+  background: transparent;
+  border-left: solid 5px #ffaf58;
+}
+
+.indexOlLg {
+  list-style:none;
+  background-color: #FAFAFD;
+  padding: 5px 0px 15px 40px;
+}
+
+.indexOlMd {
+  list-style:none;
+  padding-top: 5px;
+}
+
+.indexLiLg {
+  margin-top: 10px;
+}
+
+.indexLiMd {
+  margin-top: 5px;
+}
