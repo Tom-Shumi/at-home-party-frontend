@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import styles from '/styles/common/Header.module.css';
 import Icon from '/public/icon.png';
 import Beer from '/public/beer.png';
@@ -8,6 +9,7 @@ import ChuhighIcon from '/public/chuhigh.png';
 import SakeIcon from '/public/sake.png';
 import WineIcon from '/public/wine.png';
 import {Constant} from 'components/Constant';
+import Link from 'next/link';
 
 interface HeaderProps {
     title: string;
@@ -15,13 +17,34 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
 
-    let drinkColor = "black";
-    let snackColor = "black";
+    let drinkColor = Constant.COLOR_BLACK;
+    let snackColor = Constant.COLOR_BLACK;
 
-    if (props.title == "Home") {
-        drinkColor = "blue";
-    } else if (props.title == "Snack") {
-        snackColor = "blue";
+    if (props.title == "Snack") {
+        snackColor = Constant.COLOR_BLUE;
+    } else {
+        drinkColor = Constant.COLOR_BLUE;
+    }
+
+    let beerColor = Constant.COLOR_WHITE;
+    let chuhighColor = Constant.COLOR_WHITE;
+    let sakeColor = Constant.COLOR_WHITE;
+    let wineColor = Constant.COLOR_WHITE;
+
+    switch (props.title) {
+        case "Beer":
+            beerColor = Constant.COLOR_YELLOW;
+            break;
+        case "Chuhigh":
+            chuhighColor = Constant.COLOR_YELLOW;
+            break;
+        case "Sake":
+            sakeColor = Constant.COLOR_YELLOW;
+            break;
+        case "Wine":
+            wineColor = Constant.COLOR_YELLOW;
+            break;
+        default:
     }
 
     return (
@@ -34,25 +57,27 @@ const Header: React.FC<HeaderProps> = (props) => {
                         <li className={styles.bgCategoryLi}><a className={styles.aTag + Constant.CSS_JOIN + drinkColor}>DRINK</a>
 
                             <ul className={styles.smCategoryUl}>
-                                <li className={styles.smCategoryLi}>
-                                    <a>
-                                        <Image src={BeerIcon} alt="Beer" width={20} height={20} />
-                                        ビール
-                                    </a>
-                                </li>
-                                <li className={styles.smCategoryLi}>
+                                <Link href="/drink/beer">
+                                    <li className={styles.smCategoryLi + Constant.CSS_JOIN + beerColor}>
+                                        <a>
+                                            <Image src={BeerIcon} alt="Beer" width={20} height={20} />
+                                            ビール
+                                        </a>
+                                    </li>
+                                </Link>
+                                <li className={styles.smCategoryLi + Constant.CSS_JOIN + chuhighColor}>
                                     <a>
                                         <Image src={ChuhighIcon} alt="Chuhigh" width={20} height={20} />
                                         チューハイ
                                     </a>
                                 </li>
-                                <li className={styles.smCategoryLi}>
+                                <li className={styles.smCategoryLi + Constant.CSS_JOIN + sakeColor}>
                                     <a>
                                         <Image src={SakeIcon} alt="Sake" width={20} height={20} />
                                         日本酒
                                     </a>
                                 </li>
-                                <li className={styles.smCategoryLi}>
+                                <li className={styles.smCategoryLi + Constant.CSS_JOIN + wineColor}>
                                     <a>
                                         <Image src={WineIcon} alt="Wine" width={20} height={20} />
                                         ワイン

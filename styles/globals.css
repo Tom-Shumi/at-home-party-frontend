@@ -23,6 +23,14 @@ a {
   color: #0d6efd !important;
 }
 
+.white {
+  background-color: white;
+}
+
+.yellow {
+  background-color: lightyellow;
+}
+
 .rankingColor1 {
   background-color: lightgoldenrodyellow;
 }
@@ -33,4 +41,8 @@ a {
 
 .rankingColor3 {
   background-color: wheat;
+}
+
+.contents {
+  padding: 10px 10% 0px 10%;
 }
