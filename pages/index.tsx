@@ -17,8 +17,8 @@ const Home: React.FC = () => {
   }, []);
 
   const callFetchHomeInfo = () => {
-    // const res: Promise<HomeInfo> = fetchHomeInfo()
-    // res.then(ret => setHomeInfo(ret));
+    const res: Promise<HomeInfo> = fetchHomeInfo()
+    res.then(ret => setHomeInfo(ret));
   }
 
   return (
