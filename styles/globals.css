@@ -92,3 +92,8 @@ a {
 .indexLiMd {
   margin-top: 5px;
 }
+
+.descriptionUl {
+  margin-top: 10px;
+  font-weight: bold;
+}
