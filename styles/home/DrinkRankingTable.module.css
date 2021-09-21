@@ -3,20 +3,8 @@
   text-align: center;
 }
 
-.numberTd {
-  text-align: center;
-}
-
-.imageTd {
-  width: 80px;
-}
-
 .nameTd {
   width: 280px;
-}
-
-.starTd {
-  width: 140px;
 }
 
 .rankingTr {

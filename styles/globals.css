@@ -97,3 +97,32 @@ a {
   margin-top: 10px;
   font-weight: bold;
 }
+
+.numberTh {
+  width: 40px;
+}
+
+.centerTr {
+  text-align: center;
+}
+
+.centerTd {
+  text-align: center;
+}
+
+.rankingTr {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.imageTd {
+  width: 80px;
+}
+
+.starTh {
+  width: 140px;
+}
+
+.detailTh {
+  width: 110px;
+}
