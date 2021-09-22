@@ -21,6 +21,7 @@ const BeerRanking: React.FC<BeerRankingProps> = (props) => {
           <th className="numberTh">#</th>
           <th colSpan={headerColspan} >商品</th>
           <th className="starTh">星</th>
+          <th className="detailTh">度数</th>
           <th className="detailTh">苦味</th>
           <th className="detailTh">香り</th>
           <th className="detailTh">ホップ</th>
@@ -40,6 +41,7 @@ const BeerRanking: React.FC<BeerRankingProps> = (props) => {
                   color1={'#d3d3d3'}
                   color2={'#ffd700'}
                   edit={false} /></td>
+          <td className="centerTd">5 %</td>
           <td className="centerTd">5</td>
           <td className="centerTd">5</td>
           <td className="centerTd">5</td>
