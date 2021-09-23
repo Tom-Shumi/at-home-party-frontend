@@ -38,14 +38,14 @@ const DrinkRankingTable: React.FC<DrinkRankingTableProps> = (props) => {
                 }
               </td>
               <td className={styles.nameTd}>{drink.name}</td>
-              <td>
+              <td className="centerTd">
                 <ReactStars
                   count={5}
                   value={drink.star}
                   size={24}
                   color1={'#d3d3d3'}
                   color2={'#ffd700'}
-                  edit={false} />
+                  edit={false} />{drink.star}
               </td>
               <td>{drink.description}</td>
             </tr>)

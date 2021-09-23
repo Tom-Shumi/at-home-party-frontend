@@ -36,11 +36,11 @@ const BeerRanking: React.FC<BeerRankingProps> = (props) => {
           <td>ビール1位</td>
           <td className="centerTd"><ReactStars
                   count={5}
-                  value={3}
+                  value={3.8}
                   size={24}
                   color1={'#d3d3d3'}
                   color2={'#ffd700'}
-                  edit={false} /></td>
+                  edit={false} />3.8</td>
           <td className="centerTd">5 %</td>
           <td className="centerTd">5</td>
           <td className="centerTd">5</td>
