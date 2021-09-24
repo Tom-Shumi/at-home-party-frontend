@@ -1,9 +1,13 @@
 import {Table} from 'react-bootstrap';
+import {useEffect, useState} from 'react';
 import styles from '/styles/drink/beer/BeerRanking.module.css';
-import { Drink } from 'types/Drink';
+import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
 import {Constant} from 'components/Constant';
+import {apiClient} from 'utils/ApiUtils';
+import {env} from 'utils/EnvUtils';
+import Router from 'next/router';
 
 
 interface BeerRankingProps {
@@ -11,10 +15,24 @@ interface BeerRankingProps {
 
 const BeerRanking: React.FC<BeerRankingProps> = (props) => {
 
+  const [beerList, setBeerList] = useState<Beer[]>([]);
+
+  useEffect(() => {
+    callFetchBeerList();
+  }, []);
+
+  const callFetchBeerList = () => {
+    const res: Promise<Beer[]> = fetchBeerList()
+    res.then(ret => setBeerList(ret));
+  }
+
   const headerColspan = 2;
 
   return (
     <>
+
+
+
       <Table hover>
       <thead>
         <tr className="centerTr">
@@ -30,28 +48,67 @@ const BeerRanking: React.FC<BeerRankingProps> = (props) => {
         </tr>
       </thead>
       <tbody>
-        <tr className="rankingTr">
-          <td className="centerTd">1</td>
-          <td className="imageTd"><Image src="https://images-fe.ssl-images-amazon.com/images/P/B01BM9ECRE.09.TZZZZZZZ" alt="beer" width={70} height={70} /></td>
-          <td>ビール1位</td>
-          <td className="centerTd"><ReactStars
+        {(beerList || []).map((beer, count) => {
+          let color = "rankingColor" + (count + 1);
+
+          return (
+            <tr key={"beerRanking" + (count + 1)} className={"rankingTr" + Constant.CSS_JOIN + color} >
+              <td className="centerTd">{count + 1}</td>
+              <td className="imageTd">
+                {beer.infoUrl != null &&
+                  <Image key={"beerRankingImage" + (count + 1)}
+                  src={beer.infoUrl} alt={"beerRankingImage" + (count + 1)} width={70} height={70} />
+                }
+              </td>
+              <td className={styles.nameTd}>{beer.name}</td>
+              <td className="centerTd">
+                <ReactStars
                   count={5}
-                  value={3.8}
+                  value={beer.star}
                   size={24}
                   color1={'#d3d3d3'}
                   color2={'#ffd700'}
-                  edit={false} />3.8</td>
-          <td className="centerTd">5 %</td>
-          <td className="centerTd">5</td>
-          <td className="centerTd">5</td>
-          <td className="centerTd">5</td>
-          <td className="centerTd">5</td>
-          <td className="centerTd">5</td>
-        </tr>
+                  edit={false} />{beer.star}
+              </td>
+              <td className="centerTd">{beer.alcohol} %</td>
+              <td className="centerTd">{beer.bitter}</td>
+              <td className="centerTd">{beer.flavor}</td>
+              <td className="centerTd">{beer.hop}</td>
+              <td className="centerTd">{beer.sharp}</td>
+              <td className="centerTd">{beer.body}</td>
+            </tr>
+          )
+        })}
       </tbody>
     </Table>
     </>
   )
+}
+
+async function fetchBeerList() {
+
+  try {
+    const res = await apiClient().get(env(process.env.NEXT_PUBLIC_API_DRINK_BEER));
+
+    return createBeerList(res.data);
+
+  } catch(error){
+    Router.push('/error');
+    return [];
+  }
+}
+
+function createBeerList(responseData: any[]) {
+
+  const beerList :Beer[] = [];
+
+  for (let i = 0 ; i < responseData.length ; i++) {
+    beerList.push(new Beer(responseData[i]["id"], responseData[i]["name"], responseData[i]["description"], responseData[i]["drinkCategoryId1"], responseData[i]["drinkCategoryId2"]
+    , responseData[i]["infoUrl"], responseData[i]["alcohol"], responseData[i]["star"], responseData[i]["bitter"], responseData[i]["flavor"], responseData[i]["hop"]
+    , responseData[i]["sharp"], responseData[i]["body"]))
+  }
+
+  return beerList;
 }
 
 export default BeerRanking

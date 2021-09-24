@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import BeerCheers from '/public/beerCheers.png';
 import BeerCharm from '/public/beerCharm.png';
 import BeerType from '/public/beerType.png';
 import BeerRanking from 'components/drink/beer/BeerRanking';
+
 
 interface BeerContentsProps {
 }
@@ -65,13 +67,14 @@ const BeerContents: React.FC<BeerContentsProps> = (props) => {
         <h5 className="headingMd" id="4-1">4-1. 生ビールとは？</h5>
           <div className="contentsMd">
             「生ビール」とは、ろ過機とフィルターを使い、加熱処理なしに、酵母を完全に取り除いたビールを指します。<br />
-            現在、日本で製造される殆どのビールは「生ビール」です。<br />
+            現在、日本で製造される殆どのビールは「生ビール」です。<br /><br />
             ビールは、工場から出荷される際の樽、瓶、缶のどれに詰められるかの違いしかありません。<br />
             ジョッキで出てくる居酒屋のビールも、瓶ビールも缶ビールも、全部「生ビール」なのです。<br /><br />
             逆に、製造過程のビールをろ過後に、加熱処理により残留している酵母を死滅させたものが、生じゃないビールです。<br />
             加熱処理したビールには、生とは違った味わいがあります。<br />
             現在も製造はされていますが、大手ビールメーカー3社の各1銘柄のみとなっています。
           </div>
+          <Image src={BeerCheers} alt="乾杯" width={600} height={400} />
       </div>
     </>
   )
