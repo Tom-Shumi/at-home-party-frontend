@@ -9,6 +9,7 @@ import {apiClient} from 'utils/ApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
 import {Button} from 'react-bootstrap';
+import Pagination from 'components/common/Pagination';
 
 
 interface BeerListProps {
@@ -17,6 +18,7 @@ interface BeerListProps {
 const BeerList: React.FC<BeerListProps> = (props) => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
   const [searchText, setSearchText] = useState<string>("");
+  const [currentPage, setCurrentPage]  = useState<number>(0);
 
   useEffect(() => {
     callFetchBeerList();
@@ -29,6 +31,10 @@ const BeerList: React.FC<BeerListProps> = (props) => {
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
 
+  const paging = (page: number) => {
+
+  }
+
   const headerColspan = 2;
 
   return (
@@ -38,6 +44,10 @@ const BeerList: React.FC<BeerListProps> = (props) => {
         <Button variant="success" className="searchButton" >検索</Button>
       </div>
 
+      <Pagination
+        currentPage = {currentPage}
+        paging = {paging}
+      />
       <Table hover>
         <thead>
           <tr className="centerTr">
