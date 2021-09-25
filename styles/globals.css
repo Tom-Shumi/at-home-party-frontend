@@ -126,3 +126,12 @@ a {
 .detailTh {
   width: 110px;
 }
+
+.drinkPageHeader {
+  display: flex;
+}
+
+.drinkPageHeaderButton {
+  margin: 0 0 0 auto;
+  width: 135px;
+}

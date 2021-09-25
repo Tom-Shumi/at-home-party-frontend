@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   const [homeInfo, setHomeInfo] = useState<HomeInfo>(new HomeInfo);
 
   useEffect(() => {
-    callFetchHomeInfo();
+    // callFetchHomeInfo();
   }, []);
 
   const callFetchHomeInfo = () => {

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import BeerCheers from '/public/beerCheers.png';
 import BeerCharm from '/public/beerCharm.png';
 import BeerType from '/public/beerType.png';
-import BeerRanking from 'components/drink/beer/BeerRanking';
 
 
 interface BeerContentsProps {
@@ -33,10 +32,10 @@ const BeerContents: React.FC<BeerContentsProps> = (props) => {
         <h5 className="headingMd" id="2-1">2-1. ラガー</h5>
           <div className="contentsMd">
             ラガーとは「下面発酵によって造られたもの」を指します。<br />
-            下面発酵とは、低温で長期間発酵させる方法のことです。<br />
+            下面発酵とは、低温で長期間発酵させる方法のことです。<br /><br />
             酵母が麦汁の下面へ沈んでいくために、下面発酵と呼ばれています。<br />
             下面発酵の特徴は低温で発酵させるため、雑菌があまり繁殖することなく、<br />
-            つねに品質を一定に保ったままビールを作ることができることです。<br />
+            つねに品質を一定に保ったままビールを作ることができることです。<br /><br />
             最近の大量生産されるビールには、もってこいの方法といえます。<br /><br />
             主なラガービールの種類には以下の様なものがあります。
             <ul className="descriptionUl">
@@ -48,7 +47,7 @@ const BeerContents: React.FC<BeerContentsProps> = (props) => {
         <h5 className="headingMd" id="2-2">2-2. エール</h5>
           <div className="contentsMd">
             エールとは「上面発酵によって造られたもの」を指します。<br />
-            上面発酵とは、やや高温であまり時間をかけずに発酵させる方法のことです。<br />
+            上面発酵とは、やや高温であまり時間をかけずに発酵させる方法のことです。<br /><br />
             酵母が麦汁の上に浮き上がっていくため、上面発酵と呼ばれています。<br />
             大量生産には向きませんが、味わい深さと飲みごたえで根強い人気があります。<br /><br />
             主なエールビールの種類には以下の様なものがあります。
@@ -60,8 +59,6 @@ const BeerContents: React.FC<BeerContentsProps> = (props) => {
           </div>
         <Image src={BeerType} alt="ビールの種類" width={600} height={300} /><br />
       </div>
-      <h5 className="headingLg" id="3">3. ランキング</h5>
-        <BeerRanking />
       <h5 className="headingLg" id="4">4. ビール雑学</h5>
       <div className="contentsLg">
         <h5 className="headingMd" id="4-1">4-1. 生ビールとは？</h5>

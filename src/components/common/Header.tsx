@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                         <li className={styles.bgCategoryLi}><a className={styles.aTag + Constant.CSS_JOIN + drinkColor}>DRINK</a>
 
                             <ul className={styles.smCategoryUl}>
-                                <Link href="/drink/beer">
+                                <Link href="/drink/beer/beerList">
                                     <li className={styles.smCategoryLi + Constant.CSS_JOIN + beerColor}>
                                         <a>
                                             <Image src={BeerIcon} alt="Beer" width={20} height={20} />
