@@ -8,14 +8,15 @@ import {Constant} from 'components/Constant';
 import {apiClient} from 'utils/ApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
+import {Button} from 'react-bootstrap';
 
 
 interface BeerListProps {
 }
 
 const BeerList: React.FC<BeerListProps> = (props) => {
-
   const [beerList, setBeerList] = useState<Beer[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
     callFetchBeerList();
@@ -26,14 +27,16 @@ const BeerList: React.FC<BeerListProps> = (props) => {
     res.then(ret => setBeerList(ret));
   }
 
+  const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
+
   const headerColspan = 2;
 
   return (
     <>
       <div>
-        <input type="text" name="searchText" />
+        <input type="text" value={searchText} onChange={handleChangeSearchText()} className="searchText" placeholder="表品名を入力してください。" />
+        <Button variant="success" className="searchButton" >検索</Button>
       </div>
-
 
       <Table hover>
         <thead>

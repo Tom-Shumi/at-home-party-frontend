@@ -13,7 +13,7 @@ const BeerDetail: React.FC<BeerDetailProps> = (props) => {
       <div className="contents">
         <BeerHeader
           destination="beerList"
-          buttonName="一覧に戻る"/>
+          buttonName="←一覧に戻る"/>
         <BeerIndex />
         <BeerContents />
       </div>

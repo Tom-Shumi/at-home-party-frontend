@@ -135,3 +135,12 @@ a {
   margin: 0 0 0 auto;
   width: 135px;
 }
+
+.searchButton {
+  margin: 10px;
+  width: 100px;
+}
+
+.searchText {
+  width: 250px;
+}

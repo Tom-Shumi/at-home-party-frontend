@@ -12,7 +12,7 @@ const BeerList: React.FC<BeerListProps> = (props) => {
       <div className="contents">
         <BeerHeader
           destination="beerDetail"
-          buttonName="ビールについて" />
+          buttonName="ビールについてもっと知る →" />
         <BeerListComponent />
       </div>
     </Layout>
