@@ -18,7 +18,7 @@ const BeerList: React.FC<BeerListProps> = (props) => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
 
   useEffect(() => {
-    // callFetchBeerList();
+    callFetchBeerList();
   }, []);
 
   const callFetchBeerList = () => {
