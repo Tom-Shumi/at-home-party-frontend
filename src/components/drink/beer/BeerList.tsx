@@ -4,7 +4,6 @@ import styles from '/styles/drink/beer/BeerRanking.module.css';
 import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
-import {Constant} from 'components/Constant';
 import {apiClient} from 'utils/ApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
@@ -17,37 +16,66 @@ interface BeerListProps {
 
 const BeerList: React.FC<BeerListProps> = (props) => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
-  const [searchText, setSearchText] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>(""); // テキストボックス内の文字列
+  const [searchedText, setSearchedText] = useState<string>(""); // 実際に検索を行なった文字列
   const [currentPage, setCurrentPage]  = useState<number>(0);
+  const [maxPage, setMaxPage] = useState<number>(0);
 
+  // 初期表示用
   useEffect(() => {
     callFetchBeerList();
   }, []);
 
-  const callFetchBeerList = () => {
-    const res: Promise<Beer[]> = fetchBeerList()
+  const paging = (page: number) => {
+    setCurrentPage(page)
+    callFetchBeerList(page)
+  }
+
+  const searchBeerList = () => {
+    setSearchedText(searchText)
+
+  }
+
+  // 検索用
+  useEffect(() => {
+    callFetchBeerList();
+  }, [searchedText]);
+
+  const callFetchBeerList = (page: number = 0) => {
+    const res: Promise<Beer[]> = fetchBeerList(page)
     res.then(ret => setBeerList(ret));
+  }
+
+  async function fetchBeerList(page: number) {
+
+    const drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
+
+    try {
+      const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}?page=${page}${drinkNameQuery}`));
+
+      setMaxPage(res.data.maxPage);
+      return createBeerList(res.data.beerList);
+
+    } catch(error){
+      Router.push('/error');
+      return [];
+    }
   }
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
 
-  const paging = (page: number) => {
-
-  }
-
   const headerColspan = 2;
+
+  const isNoData = beerList.length == 0;
 
   return (
     <>
       <div>
         <input type="text" value={searchText} onChange={handleChangeSearchText()} className="searchText" placeholder="表品名を入力してください。" />
-        <Button variant="success" className="searchButton" >検索</Button>
+        <Button variant="success" className="searchButton" onClick={() => searchBeerList()} >検索</Button>
       </div>
 
-      <Pagination
-        currentPage = {currentPage}
-        paging = {paging}
-      />
+      <Pagination currentPage={currentPage} maxPage={maxPage} paging={paging} />
       <Table hover>
         <thead>
           <tr className="centerTr">
@@ -64,10 +92,8 @@ const BeerList: React.FC<BeerListProps> = (props) => {
         </thead>
         <tbody>
           {(beerList || []).map((beer, count) => {
-            let color = "rankingColor" + (count + 1);
-
             return (
-              <tr key={"beerRanking" + (count + 1)} className={"rankingTr" + Constant.CSS_JOIN + color} >
+              <tr key={"beerRanking" + (count + 1)} className="rankingTr" >
                 <td className="centerTd">{count + 1}</td>
                 <td className="imageTd">
                   {beer.infoUrl != null &&
@@ -96,21 +122,9 @@ const BeerList: React.FC<BeerListProps> = (props) => {
           })}
         </tbody>
       </Table>
+      <Pagination currentPage={currentPage} maxPage={maxPage} paging={paging} />
     </>
   )
-}
-
-async function fetchBeerList() {
-
-  try {
-    const res = await apiClient().get(env(process.env.NEXT_PUBLIC_API_DRINK_BEER));
-
-    return createBeerList(res.data);
-
-  } catch(error){
-    Router.push('/error');
-    return [];
-  }
 }
 
 function createBeerList(responseData: any[]) {
