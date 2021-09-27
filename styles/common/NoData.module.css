@@ -1,0 +1,12 @@
+.noDataDiv {
+  text-align: center;
+  vertical-align: middle;
+  color: tomato;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  background: #FFF;
+  border: solid 3px tomato;
+  border-radius: 10px;
+  padding: 20px;
+}
