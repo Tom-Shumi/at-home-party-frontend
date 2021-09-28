@@ -18,7 +18,7 @@ const BeerHeader: React.FC<BeerHeaderProps> = (props) => {
     <>
       <div className="drinkPageHeader">
         <h1><Image src={BeerIcon} className={styles.beerIcon} alt="Beer" width={40} height={40} />ビール</h1>
-        <Button variant="warning" className="drinkPageHeaderButton" onClick={() => link(props.destination)} >
+        <Button variant="outline-warning" className="drinkPageHeaderButton" onClick={() => link(props.destination)} >
           {props.buttonName}
         </Button>
       </div>

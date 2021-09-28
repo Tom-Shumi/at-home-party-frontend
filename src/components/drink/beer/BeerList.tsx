@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
 import { Beer } from 'types/Beer';
-import {apiClient} from 'utils/ApiUtils';
+import {apiClient, createOrderQuery} from 'utils/ApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
 import {Button} from 'react-bootstrap';
 import NoData from 'components/common/NoData';
 import BeerListTable from 'components/drink/beer/BeerListTable';
+import styles from '/styles/drink/beer/BeerList.module.css';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -14,6 +15,9 @@ const BeerList: React.FC = () => {
   const [currentPage, setCurrentPage]  = useState<number>(0);
   const [maxPage, setMaxPage] = useState<number>(0);
   const [order, setOrder] = useState<string>("");
+
+  const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
+  const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
 
   // 初期表示用
   useEffect(() => {
@@ -35,6 +39,11 @@ const BeerList: React.FC = () => {
     callFetchBeerList();
   }, [searchedText]);
 
+  // 並び替え用
+  useEffect(() => {
+    callFetchBeerList();
+  }, [order]);
+
   const callFetchBeerList = (page: number = 0) => {
     const res: Promise<Beer[]> = fetchBeerList(page)
     res.then(ret => setBeerList(ret));
@@ -43,9 +52,10 @@ const BeerList: React.FC = () => {
   async function fetchBeerList(page: number) {
 
     const drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
+    let orderQuery = createOrderQuery(order);
 
     try {
-      const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}?page=${page}${drinkNameQuery}`));
+      const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}?page=${page}${drinkNameQuery}${orderQuery}`));
 
       setMaxPage(res.data.maxPage);
       return createBeerList(res.data.beerList);
@@ -56,17 +66,16 @@ const BeerList: React.FC = () => {
     }
   }
 
-  const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
-
   const isNoData = beerList.length == 0;
 
   return (
     <>
       <div>
-        <input type="text" value={searchText} onChange={handleChangeSearchText()} className="searchText" placeholder="表品名を入力してください。" />
-        <Button variant="success" className="searchButton" onClick={() => searchBeerList()} >検索</Button>
+        <input type="text" value={searchText} onChange={handleChangeSearchText()} className="searchText" placeholder="商品名を入力してください。" />
+        <Button variant="warning" className="searchButton" onClick={() => searchBeerList()} >商品名で検索</Button>
 
-        <select value={order}>
+        並び替え：
+        <select value={order} onChange={handleChangeOrder()} className={styles.orderSelect}>
           <option value=""></option>
           <option value="STAR_DESC">星多い順</option>
           <option value="STAR_ASC">星少ない順</option>
@@ -83,6 +92,8 @@ const BeerList: React.FC = () => {
           <option value="BODY_DESC">ボディ強い順</option>
           <option value="BODY_ASC">ボディ弱い順</option>
         </select>
+
+        <Button variant="warning" className="detailSearchButton" onClick={() => searchBeerList()} >詳細検索</Button>
       </div>
 
       {isNoData || <BeerListTable beerList={beerList} currentPage={currentPage} maxPage={maxPage} paging={paging} />}

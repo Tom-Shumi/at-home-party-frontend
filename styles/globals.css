@@ -137,8 +137,14 @@ a {
 }
 
 .searchButton {
-  margin: 10px;
-  width: 100px;
+  margin: 10px 25px 10px 10px;
+  width: 125px;
+}
+
+.detailSearchButton {
+  margin: 10px 25px 10px 10px;
+  width: 125px;
+  float: right;
 }
 
 .searchText {

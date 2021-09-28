@@ -1,5 +1,5 @@
 import {Table} from 'react-bootstrap';
-import styles from '/styles/drink/beer/BeerRanking.module.css';
+import styles from '/styles/drink/beer/BeerListTable.module.css';
 import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
