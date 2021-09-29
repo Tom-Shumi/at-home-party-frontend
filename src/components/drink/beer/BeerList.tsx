@@ -15,6 +15,7 @@ const BeerList: React.FC = () => {
   const [currentPage, setCurrentPage]  = useState<number>(0);
   const [maxPage, setMaxPage] = useState<number>(0);
   const [order, setOrder] = useState<string>("");
+  const [detailSearchCondition, setDetailSearchCondition] = useState(initDetailSearchCondition());
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
@@ -100,6 +101,11 @@ const BeerList: React.FC = () => {
       {isNoData && <NoData />}
     </>
   )
+}
+
+function initDetailSearchCondition() {
+  // TODO
+  return {}
 }
 
 function createBeerList(responseData: any[]) {
