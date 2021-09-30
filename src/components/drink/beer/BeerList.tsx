@@ -7,6 +7,7 @@ import {Button} from 'react-bootstrap';
 import NoData from 'components/common/NoData';
 import BeerListTable from 'components/drink/beer/BeerListTable';
 import styles from '/styles/drink/beer/BeerList.module.css';
+import BeerDetailSearchModal from 'components/drink/beer/BeerDetailSearchModal';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -16,6 +17,7 @@ const BeerList: React.FC = () => {
   const [maxPage, setMaxPage] = useState<number>(0);
   const [order, setOrder] = useState<string>("");
   const [detailSearchCondition, setDetailSearchCondition] = useState(initDetailSearchCondition());
+  const [isDetailSearchModalOpen, setIsDetailSearchModalOpen] = useState<boolean>(false);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
@@ -32,7 +34,6 @@ const BeerList: React.FC = () => {
 
   const searchBeerList = () => {
     setSearchedText(searchText)
-
   }
 
   // 検索用
@@ -67,6 +68,9 @@ const BeerList: React.FC = () => {
     }
   }
 
+  const openDetailSearchModal = () => setIsDetailSearchModalOpen(true);
+  const closeDetailSearchModal = () => setIsDetailSearchModalOpen(false);
+
   const isNoData = beerList.length == 0;
 
   return (
@@ -94,7 +98,9 @@ const BeerList: React.FC = () => {
           <option value="BODY_ASC">ボディ弱い順</option>
         </select>
 
-        <Button variant="warning" className="detailSearchButton" onClick={() => searchBeerList()} >詳細検索</Button>
+        <Button variant="warning" className="detailSearchButton" onClick={() => openDetailSearchModal()} >詳細検索</Button>
+        {isDetailSearchModalOpen && <BeerDetailSearchModal detailSearchCondition={detailSearchCondition}
+                                      setDetailSearchCondition={setDetailSearchCondition} close={closeDetailSearchModal}/>}
       </div>
 
       {isNoData || <BeerListTable beerList={beerList} currentPage={currentPage} maxPage={maxPage} paging={paging} />}
@@ -104,8 +110,8 @@ const BeerList: React.FC = () => {
 }
 
 function initDetailSearchCondition() {
-  // TODO
-  return {}
+  return {drinkName: null, starFrom: null, starTo: null, alcoholFrom: null, alcoholTo: null, bitterFrom: null, bitterTo: null,
+          flavorFrom: null, flavorTo: null, hopFrom: null, hopTo: null, sharpFrom: null, sharpTo: null, bodyFrom: null, bodyTo: null}
 }
 
 function createBeerList(responseData: any[]) {
