@@ -150,3 +150,33 @@ a {
 .searchText {
   width: 250px;
 }
+
+.modal {
+  color: #669;
+}
+
+.modalTitle {
+  font-size: 28px !important;
+  font-weight: bold !important;
+}
+
+.modalLabel {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modalInput {
+  padding: 0px 0px 15px 0px;
+}
+
+.modalFullText {
+  width: 330px;
+}
+
+.modalRangeText {
+  width: 80px;
+}
+
+.modalButton {
+  width: 120px;
+}
