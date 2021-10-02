@@ -1,74 +1,36 @@
-import styles from '/styles/common/BeerDetailSearchModal.module.css';
-import {Modal, Button, Row, Col} from 'react-bootstrap';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import DetailSearchModal from 'components/common/DetailSearchModal/DetailSearchModal';
+import DrinkNameTextBox from 'components/common/DetailSearchModal/DrinkNameTextBox';
+import StarTextBox from 'components/common/DetailSearchModal/StarTextBox';
+import AlcoholTextBox from 'components/common/DetailSearchModal/AlcoholTextBox';
+import FeatureScoreTextBox from 'components/common/DetailSearchModal/FeatureScoreTextBox';
 
 interface BeerDetailSearchModalProps {
   detailSearchCondition: {};
-  setDetailSearchCondition: any;
+  setDetailSearchCondition: Dispatch<SetStateAction<any>>;
   close: () => void;
 }
 
 const BeerDetailSearchModal: React.FC<BeerDetailSearchModalProps> = (props) => {
+  const [tempDetailSearchCondition, setTempDetailSearchCondition] = useState(props.detailSearchCondition);
+
+  const handleInput = (input: string) => {
+    return (e: { target: { value: any; }; }) => setTempDetailSearchCondition({...tempDetailSearchCondition, [input]: e.target.value})
+  }
+
+  const setDetailSearchCondition = () => props.setDetailSearchCondition(tempDetailSearchCondition)
 
   return (
-    <Modal show={true} onHide={props.close} key='beerDetailSearchModal' animation = {false} className="modal">
-      <Modal.Header>
-        <Modal.Title className="modalTitle">詳細検索</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Row>
-          <Col xs={3} className="modalLabel">商品名</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalFullText" />
-          </Col>
-          <Col xs={3} className="modalLabel">星</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-          <Col xs={3} className="modalLabel">度数</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> ％
-            　〜　
-            <input type="text" className="modalRangeText" /> ％
-          </Col>
-          <Col xs={3} className="modalLabel">苦味</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-          <Col xs={3} className="modalLabel">香り</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-          <Col xs={3} className="modalLabel">ホップ</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-          <Col xs={3} className="modalLabel">キレ</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-          <Col xs={3} className="modalLabel">ボディ</Col>
-          <Col xs={9} className="modalInput">
-            <input type="text" className="modalRangeText" /> 点
-            　〜　
-            <input type="text" className="modalRangeText" /> 点
-          </Col>
-        </Row>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="outline-warning" className="modalButton">詳細検索</Button>
-        <Button variant="outline-dark" className="modalButton">閉じる</Button>
-      </Modal.Footer>
-    </Modal>
+    <DetailSearchModal setDetailSearchCondition={setDetailSearchCondition} close={props.close} >
+      <DrinkNameTextBox handleInput={handleInput}/><hr />
+      <StarTextBox handleInput={handleInput}/><hr />
+      <AlcoholTextBox handleInput={handleInput}/><hr />
+      <FeatureScoreTextBox displayFeatureName={"苦味"} featureName={"bitter"} handleInput={handleInput}/><hr />
+      <FeatureScoreTextBox displayFeatureName={"香り"} featureName={"flavor"} handleInput={handleInput}/><hr />
+      <FeatureScoreTextBox displayFeatureName={"ホップ"} featureName={"hop"} handleInput={handleInput}/><hr />
+      <FeatureScoreTextBox displayFeatureName={"キレ"} featureName={"sharp"} handleInput={handleInput}/><hr />
+      <FeatureScoreTextBox displayFeatureName={"ボディ"} featureName={"body"} handleInput={handleInput}/>
+    </DetailSearchModal>
   )
 }
 

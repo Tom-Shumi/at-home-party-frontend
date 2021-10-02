@@ -151,18 +151,19 @@ a {
   width: 250px;
 }
 
-.modal {
-  color: #669;
-}
-
 .modalTitle {
-  font-size: 28px !important;
-  font-weight: bold !important;
+  padding: 0.5em;
+  color: darkorange;
+  background: #fffaf4;
+  border-left: solid 5px #ffaf58;
+  margin-bottom: 20px !important;
 }
 
 .modalLabel {
   font-size: 20px;
   font-weight: bold;
+  color: gray;
+  padding-left: 25px !important;
 }
 
 .modalInput {

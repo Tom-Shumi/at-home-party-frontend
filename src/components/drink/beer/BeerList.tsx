@@ -46,6 +46,12 @@ const BeerList: React.FC = () => {
     callFetchBeerList();
   }, [order]);
 
+  // 詳細検索用
+  useEffect(() => {
+    console.log(detailSearchCondition) // TODO
+    closeDetailSearchModal()
+  }, [detailSearchCondition]);
+
   const callFetchBeerList = (page: number = 0) => {
     const res: Promise<Beer[]> = fetchBeerList(page)
     res.then(ret => setBeerList(ret));
@@ -99,8 +105,9 @@ const BeerList: React.FC = () => {
         </select>
 
         <Button variant="warning" className="detailSearchButton" onClick={() => openDetailSearchModal()} >詳細検索</Button>
-        {isDetailSearchModalOpen && <BeerDetailSearchModal detailSearchCondition={detailSearchCondition}
-                                      setDetailSearchCondition={setDetailSearchCondition} close={closeDetailSearchModal}/>}
+        {isDetailSearchModalOpen &&
+          <BeerDetailSearchModal detailSearchCondition={detailSearchCondition}
+            setDetailSearchCondition={setDetailSearchCondition} close={closeDetailSearchModal}/>}
       </div>
 
       {isNoData || <BeerListTable beerList={beerList} currentPage={currentPage} maxPage={maxPage} paging={paging} />}
