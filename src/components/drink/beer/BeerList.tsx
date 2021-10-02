@@ -8,6 +8,7 @@ import NoData from 'components/common/NoData';
 import BeerListTable from 'components/drink/beer/BeerListTable';
 import styles from '/styles/drink/beer/BeerList.module.css';
 import BeerDetailSearchModal from 'components/drink/beer/BeerDetailSearchModal';
+import {Constant} from 'components/Constant';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -36,30 +37,40 @@ const BeerList: React.FC = () => {
     setSearchedText(searchText)
   }
 
-  // 検索用
+  // 商品名検索用
   useEffect(() => {
-    callFetchBeerList();
+    callFetchBeerList(0, Constant.SEARCH_TYPE_DRINK_NAME);
   }, [searchedText]);
 
   // 並び替え用
   useEffect(() => {
-    callFetchBeerList();
+    callFetchBeerList(0, Constant.SEARCH_TYPE_SORT);
   }, [order]);
 
   // 詳細検索用
   useEffect(() => {
-    console.log(detailSearchCondition) // TODO
-    closeDetailSearchModal()
+    callFetchBeerList(0, Constant.SEARCH_TYPE_DETAIL);
+    closeDetailSearchModal();
   }, [detailSearchCondition]);
 
-  const callFetchBeerList = (page: number = 0) => {
-    const res: Promise<Beer[]> = fetchBeerList(page)
+  const callFetchBeerList = (page: number = 0, searchType: string = Constant.SEARCH_TYPE_DEFAULT) => {
+    const res: Promise<Beer[]> = fetchBeerList(page, searchType)
     res.then(ret => setBeerList(ret));
   }
 
-  async function fetchBeerList(page: number) {
+  async function fetchBeerList(page: number, searchType: string) {
 
-    const drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
+    let drinkNameQuery = "";
+    let detailSearchQuery = "";
+
+    if (searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
+      drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
+    }
+
+    if (searchType == Constant.SEARCH_TYPE_DETAIL) {
+      console.log(detailSearchCondition) // TODO
+    }
+
     let orderQuery = createOrderQuery(order);
 
     try {

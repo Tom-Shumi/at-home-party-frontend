@@ -12,8 +12,6 @@ interface BeerHeaderProps {
 
 const BeerHeader: React.FC<BeerHeaderProps> = (props) => {
 
-
-
   return (
     <>
       <div className="drinkPageHeader">
