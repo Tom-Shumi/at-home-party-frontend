@@ -176,8 +176,13 @@ a {
 
 .modalRangeText {
   width: 80px;
+  text-align: right;
 }
 
 .modalButton {
   width: 120px;
+}
+
+.orderSelect {
+  width: 175px;
 }

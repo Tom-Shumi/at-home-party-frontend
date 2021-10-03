@@ -1,14 +1,15 @@
 import {useEffect, useState} from 'react';
 import { Beer } from 'types/Beer';
-import {apiClient, createOrderQuery} from 'utils/ApiUtils';
+import {apiClient} from 'utils/ApiUtils';
+import {createQueryString} from 'utils/ListApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
 import {Button} from 'react-bootstrap';
 import NoData from 'components/common/NoData';
 import BeerListTable from 'components/drink/beer/BeerListTable';
-import styles from '/styles/drink/beer/BeerList.module.css';
 import BeerDetailSearchModal from 'components/drink/beer/BeerDetailSearchModal';
 import {Constant} from 'components/Constant';
+import BeerSortSelectBox from 'components/drink/beer/BeerSortSelectBox';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -19,6 +20,7 @@ const BeerList: React.FC = () => {
   const [order, setOrder] = useState<string>("");
   const [detailSearchCondition, setDetailSearchCondition] = useState(initDetailSearchCondition());
   const [isDetailSearchModalOpen, setIsDetailSearchModalOpen] = useState<boolean>(false);
+  const [currentSearchType, setCurrentSearchType] = useState<string>(Constant.SEARCH_TYPE_DEFAULT);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
@@ -42,39 +44,36 @@ const BeerList: React.FC = () => {
     callFetchBeerList(0, Constant.SEARCH_TYPE_DRINK_NAME);
   }, [searchedText]);
 
-  // 並び替え用
-  useEffect(() => {
-    callFetchBeerList(0, Constant.SEARCH_TYPE_SORT);
-  }, [order]);
-
   // 詳細検索用
   useEffect(() => {
     callFetchBeerList(0, Constant.SEARCH_TYPE_DETAIL);
     closeDetailSearchModal();
   }, [detailSearchCondition]);
 
+  // 並び替え用
+  useEffect(() => {
+    callFetchBeerList();
+  }, [order]);
+
   const callFetchBeerList = (page: number = 0, searchType: string = Constant.SEARCH_TYPE_DEFAULT) => {
-    const res: Promise<Beer[]> = fetchBeerList(page, searchType)
+
+    // TODO
+    if (currentSearchType == Constant.SEARCH_TYPE_DEFAULT) {
+      searchType = currentSearchType;
+    } else {
+      setCurrentSearchType(searchType);
+    }
+
+    const res: Promise<Beer[]> = fetchBeerList(page, searchType);
     res.then(ret => setBeerList(ret));
   }
 
   async function fetchBeerList(page: number, searchType: string) {
 
-    let drinkNameQuery = "";
-    let detailSearchQuery = "";
-
-    if (searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
-      drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
-    }
-
-    if (searchType == Constant.SEARCH_TYPE_DETAIL) {
-      console.log(detailSearchCondition) // TODO
-    }
-
-    let orderQuery = createOrderQuery(order);
+    const queryString: string = createQueryString(page, searchType, searchedText, detailSearchCondition, order);
 
     try {
-      const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}?page=${page}${drinkNameQuery}${orderQuery}`));
+      const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`));
 
       setMaxPage(res.data.maxPage);
       return createBeerList(res.data.beerList);
@@ -96,24 +95,7 @@ const BeerList: React.FC = () => {
         <input type="text" value={searchText} onChange={handleChangeSearchText()} className="searchText" placeholder="商品名を入力してください。" />
         <Button variant="warning" className="searchButton" onClick={() => searchBeerList()} >商品名で検索</Button>
 
-        並び替え：
-        <select value={order} onChange={handleChangeOrder()} className={styles.orderSelect}>
-          <option value=""></option>
-          <option value="STAR_DESC">星多い順</option>
-          <option value="STAR_ASC">星少ない順</option>
-          <option value="ALCOHOL_DESC">アルコール強い順</option>
-          <option value="ALCOHOL_ASC">アルコール弱い順</option>
-          <option value="BITTER_DESC">苦味強い順</option>
-          <option value="BITTER_ASC">苦味弱い順</option>
-          <option value="FLAVOR_DESC">香り強い順</option>
-          <option value="FLAVOR_ASC">香り弱い順</option>
-          <option value="HOP_DESC">ホップ感ある順</option>
-          <option value="HOP_ASC">ホップ感ない順</option>
-          <option value="SHARP_DESC">キレある順</option>
-          <option value="SHARP_ASC">キレない順</option>
-          <option value="BODY_DESC">ボディ強い順</option>
-          <option value="BODY_ASC">ボディ弱い順</option>
-        </select>
+        <BeerSortSelectBox order={order} handleChangeOrder={handleChangeOrder}/>
 
         <Button variant="warning" className="detailSearchButton" onClick={() => openDetailSearchModal()} >詳細検索</Button>
         {isDetailSearchModalOpen &&
@@ -127,9 +109,12 @@ const BeerList: React.FC = () => {
   )
 }
 
-function initDetailSearchCondition() {
-  return {drinkName: null, starFrom: null, starTo: null, alcoholFrom: null, alcoholTo: null, bitterFrom: null, bitterTo: null,
-          flavorFrom: null, flavorTo: null, hopFrom: null, hopTo: null, sharpFrom: null, sharpTo: null, bodyFrom: null, bodyTo: null}
+export default BeerList
+
+
+export function initDetailSearchCondition() {
+  return {drinkName: "", starFrom: "", starTo: "", alcoholFrom: "", alcoholTo: "", bitterFrom: "", bitterTo: "",
+          flavorFrom: "", flavorTo: "", hopFrom: "", hopTo: "", sharpFrom: "", sharpTo: "", bodyFrom: "", bodyTo: ""}
 }
 
 function createBeerList(responseData: any[]) {
@@ -144,5 +129,3 @@ function createBeerList(responseData: any[]) {
 
   return beerList;
 }
-
-export default BeerList

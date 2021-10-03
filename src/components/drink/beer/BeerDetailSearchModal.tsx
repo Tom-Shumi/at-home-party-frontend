@@ -4,9 +4,10 @@ import DrinkNameTextBox from 'components/common/DetailSearchModal/DrinkNameTextB
 import StarTextBox from 'components/common/DetailSearchModal/StarTextBox';
 import AlcoholTextBox from 'components/common/DetailSearchModal/AlcoholTextBox';
 import FeatureScoreTextBox from 'components/common/DetailSearchModal/FeatureScoreTextBox';
+import {initDetailSearchCondition} from 'components/drink/beer/BeerList'
 
 interface BeerDetailSearchModalProps {
-  detailSearchCondition: {};
+  detailSearchCondition: any;
   setDetailSearchCondition: Dispatch<SetStateAction<any>>;
   close: () => void;
 }
@@ -18,18 +19,27 @@ const BeerDetailSearchModal: React.FC<BeerDetailSearchModalProps> = (props) => {
     return (e: { target: { value: any; }; }) => setTempDetailSearchCondition({...tempDetailSearchCondition, [input]: e.target.value})
   }
 
-  const setDetailSearchCondition = () => props.setDetailSearchCondition(tempDetailSearchCondition)
+  const setDetailSearchCondition = () => {
+    const copyDetailSearchCondition = {...tempDetailSearchCondition};
+    props.setDetailSearchCondition(copyDetailSearchCondition)
+  };
+  const clearDetailSearchCondition = () => setTempDetailSearchCondition(initDetailSearchCondition);
 
   return (
-    <DetailSearchModal setDetailSearchCondition={setDetailSearchCondition} close={props.close} >
-      <DrinkNameTextBox handleInput={handleInput}/><hr />
-      <StarTextBox handleInput={handleInput}/><hr />
-      <AlcoholTextBox handleInput={handleInput}/><hr />
-      <FeatureScoreTextBox displayFeatureName={"苦味"} featureName={"bitter"} handleInput={handleInput}/><hr />
-      <FeatureScoreTextBox displayFeatureName={"香り"} featureName={"flavor"} handleInput={handleInput}/><hr />
-      <FeatureScoreTextBox displayFeatureName={"ホップ"} featureName={"hop"} handleInput={handleInput}/><hr />
-      <FeatureScoreTextBox displayFeatureName={"キレ"} featureName={"sharp"} handleInput={handleInput}/><hr />
-      <FeatureScoreTextBox displayFeatureName={"ボディ"} featureName={"body"} handleInput={handleInput}/>
+    <DetailSearchModal setDetailSearchCondition={setDetailSearchCondition} clear={clearDetailSearchCondition} close={props.close} >
+      <DrinkNameTextBox handleInput={handleInput} value={tempDetailSearchCondition.drinkName} /><hr />
+      <StarTextBox handleInput={handleInput} valueFrom={tempDetailSearchCondition.starFrom} valueTo={tempDetailSearchCondition.starTo} /><hr />
+      <AlcoholTextBox handleInput={handleInput} valueFrom={tempDetailSearchCondition.alcoholFrom} valueTo={tempDetailSearchCondition.alcoholTo} /><hr />
+      <FeatureScoreTextBox displayFeatureName={"苦味"} featureName={"bitter"}
+        handleInput={handleInput} valueFrom={tempDetailSearchCondition.bitterFrom} valueTo={tempDetailSearchCondition.bitterTo} /><hr />
+      <FeatureScoreTextBox displayFeatureName={"香り"} featureName={"flavor"}
+        handleInput={handleInput} valueFrom={tempDetailSearchCondition.flavorFrom} valueTo={tempDetailSearchCondition.flavorTo} /><hr />
+      <FeatureScoreTextBox displayFeatureName={"ホップ"} featureName={"hop"}
+        handleInput={handleInput} valueFrom={tempDetailSearchCondition.hopFrom} valueTo={tempDetailSearchCondition.hopTo} /><hr />
+      <FeatureScoreTextBox displayFeatureName={"キレ"} featureName={"sharp"}
+        handleInput={handleInput} valueFrom={tempDetailSearchCondition.sharpFrom} valueTo={tempDetailSearchCondition.sharpTo} /><hr />
+      <FeatureScoreTextBox displayFeatureName={"ボディ"} featureName={"body"}
+        handleInput={handleInput} valueFrom={tempDetailSearchCondition.bodyFrom} valueTo={tempDetailSearchCondition.bodyTo} />
     </DetailSearchModal>
   )
 }

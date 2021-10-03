@@ -10,17 +10,3 @@ export const apiClient = () => {
       },
       withCredentials: true });
 }
-
-export const createOrderQuery = (order: string) => {
-  let orderQuery = "";
-
-  if (order != "") {
-    const orderArr = order.split("_");
-    const orderType = orderArr[0];
-    const isDesc = orderArr[1] == "DESC" ? true : false;
-
-    orderQuery = `&order=${orderType}&isDesc=${isDesc}`;
-  }
-
-  return orderQuery;
-}
