@@ -55,9 +55,9 @@ const BeerContents: React.FC = () => {
           </div>
         <Image src={BeerType} alt="ビールの種類" width={600} height={300} /><br />
       </div>
-      <h5 className="headingLg" id="4">4. ビール雑学</h5>
+      <h5 className="headingLg" id="3">3. ビール雑学</h5>
       <div className="contentsLg">
-        <h5 className="headingMd" id="4-1">4-1. 生ビールとは？</h5>
+        <h5 className="headingMd" id="3-1">3-1. 生ビールとは？</h5>
           <div className="contentsMd">
             「生ビール」とは、ろ過機とフィルターを使い、加熱処理なしに、酵母を完全に取り除いたビールを指します。<br />
             現在、日本で製造される殆どのビールは「生ビール」です。<br /><br />

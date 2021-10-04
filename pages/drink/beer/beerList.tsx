@@ -8,7 +8,8 @@ const BeerList: React.FC = () => {
     <Layout title = "Beer">
       <div className="contents">
         <BeerHeader
-          destination="beerDetail"
+          title="ビール"
+          destination="beerContents"
           buttonName="ビールについてもっと知る →" />
         <BeerListComponent />
       </div>
