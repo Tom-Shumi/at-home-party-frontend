@@ -1,11 +1,8 @@
 import Layout from 'components/common/Layout';
 import BeerHeader from 'components/drink/beer/BeerHeader';
-import BeerListComponent from 'components/drink/beer/BeerList';
+import BeerListComponent from 'components/drink/beer/beerList/BeerList';
 
-interface BeerListProps {
-}
-
-const BeerList: React.FC<BeerListProps> = (props) => {
+const BeerList: React.FC = () => {
 
   return (
     <Layout title = "Beer">

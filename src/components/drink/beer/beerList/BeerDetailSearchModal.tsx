@@ -4,7 +4,7 @@ import DrinkNameTextBox from 'components/common/DetailSearchModal/DrinkNameTextB
 import StarTextBox from 'components/common/DetailSearchModal/StarTextBox';
 import AlcoholTextBox from 'components/common/DetailSearchModal/AlcoholTextBox';
 import FeatureScoreTextBox from 'components/common/DetailSearchModal/FeatureScoreTextBox';
-import {initDetailSearchCondition} from 'components/drink/beer/BeerList'
+import {initDetailSearchCondition} from 'components/drink/beer/beerList/BeerList'
 
 interface BeerDetailSearchModalProps {
   detailSearchCondition: any;

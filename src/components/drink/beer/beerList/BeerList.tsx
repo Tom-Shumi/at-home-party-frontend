@@ -6,10 +6,10 @@ import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
 import {Button} from 'react-bootstrap';
 import NoData from 'components/common/NoData';
-import BeerListTable from 'components/drink/beer/BeerListTable';
-import BeerDetailSearchModal from 'components/drink/beer/BeerDetailSearchModal';
+import BeerListTable from 'components/drink/beer/beerList/BeerListTable';
+import BeerDetailSearchModal from 'components/drink/beer/beerList/BeerDetailSearchModal';
 import {Constant} from 'components/Constant';
-import BeerSortSelectBox from 'components/drink/beer/BeerSortSelectBox';
+import BeerSortSelectBox from 'components/drink/beer/beerList/BeerSortSelectBox';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);

@@ -1,7 +1,7 @@
 import Layout from 'components/common/Layout';
 import BeerHeader from 'components/drink/beer/BeerHeader';
-import BeerIndex from 'components/drink/beer/BeerIndex';
-import BeerContents from 'components/drink/beer/BeerContents';
+import BeerIndex from 'components/drink/beer/beerContents/BeerIndex';
+import BeerContents from 'components/drink/beer/beerContents/BeerContents';
 
 interface BeerDetailProps {
 }
