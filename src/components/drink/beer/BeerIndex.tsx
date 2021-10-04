@@ -1,10 +1,5 @@
 
-interface BeerDetailProps {
-}
-
-const BeerDetail: React.FC<BeerDetailProps> = (props) => {
-
-
+const BeerIndex: React.FC = () => {
 
   return (
     <>
@@ -25,4 +20,4 @@ const BeerDetail: React.FC<BeerDetailProps> = (props) => {
   )
 }
 
-export default BeerDetail
+export default BeerIndex

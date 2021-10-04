@@ -57,8 +57,7 @@ const BeerList: React.FC = () => {
 
   const callFetchBeerList = (page: number = 0, searchType: string = Constant.SEARCH_TYPE_DEFAULT) => {
 
-    // TODO
-    if (currentSearchType == Constant.SEARCH_TYPE_DEFAULT) {
+    if (searchType == Constant.SEARCH_TYPE_DEFAULT) {
       searchType = currentSearchType;
     } else {
       setCurrentSearchType(searchType);

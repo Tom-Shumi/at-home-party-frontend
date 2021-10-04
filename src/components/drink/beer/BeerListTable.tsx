@@ -1,5 +1,4 @@
 import {Table} from 'react-bootstrap';
-import styles from '/styles/drink/beer/BeerListTable.module.css';
 import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
@@ -45,7 +44,7 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
                     src={beer.infoUrl} alt={"beerRankingImage" + (count + 1)} width={70} height={70} />
                   }
                 </td>
-                <td className={styles.nameTd}>{beer.name}</td>
+                <td>{beer.name}</td>
                 <td className="centerTd">
                   <ReactStars
                     count={5}

@@ -3,11 +3,7 @@ import BeerCheers from '/public/beerCheers.png';
 import BeerCharm from '/public/beerCharm.png';
 import BeerType from '/public/beerType.png';
 
-
-interface BeerContentsProps {
-}
-
-const BeerContents: React.FC<BeerContentsProps> = (props) => {
+const BeerContents: React.FC = () => {
 
   return (
     <>
