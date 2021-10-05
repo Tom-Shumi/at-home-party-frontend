@@ -3,6 +3,7 @@ import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
 import Pagination from 'components/common/Pagination';
+import { useRouter } from 'next/router';
 
 
 interface BeerListTableProps {
@@ -13,8 +14,14 @@ interface BeerListTableProps {
 }
 
 const BeerListTable: React.FC<BeerListTableProps> = (props) => {
+  const router = useRouter();
 
-  const headerColspan = 2;
+  const openBeerDetail = (id: number) => {
+    router.push({
+      pathname: "/drink/beer/beerDetail",
+      query: {id : id}
+    });
+  }
 
   return (
     <>
@@ -23,7 +30,7 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
         <thead>
           <tr className="centerTr">
             <th className="numberTh">#</th>
-            <th colSpan={headerColspan} >商品</th>
+            <th colSpan={2} >商品</th>
             <th className="starTh">星</th>
             <th className="detailTh">度数</th>
             <th className="detailTh">苦味</th>
@@ -36,7 +43,7 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
         <tbody>
           {(props.beerList || []).map((beer, count) => {
             return (
-              <tr key={"beerRanking" + (count + 1)} className="rankingTr" >
+              <tr key={"beerRanking" + (count + 1)} className="rankingTr" onClick={() => openBeerDetail(beer.id)}>
                 <td className="centerTd">{count + 1}</td>
                 <td className="imageTd">
                   {beer.infoUrl != null &&

@@ -12,14 +12,12 @@ interface DrinkRankingTableProps {
 
 const DrinkRankingTable: React.FC<DrinkRankingTableProps> = (props) => {
 
-  const headerColspan = 2;
-
   return (
     <Table hover>
       <thead>
         <tr className="centerTr">
           <th className="numberTh">#</th>
-          <th colSpan={headerColspan} >商品</th>
+          <th colSpan={2} >商品</th>
           <th className="starTh">星</th>
           <th>説明</th>
         </tr>

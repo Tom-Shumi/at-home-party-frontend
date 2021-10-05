@@ -6,7 +6,7 @@ import {link} from 'utils/CommonUtils';
 
 
 interface BeerHeaderProps {
-  title: string;
+  title: any;
   destination: string;
   buttonName: string;
 }
