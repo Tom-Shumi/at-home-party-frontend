@@ -1,17 +1,17 @@
 import Layout from 'components/common/Layout';
-import { useRouter } from 'next/router';
 import BeerHeader from 'components/drink/beer/BeerHeader';
+import { useRecoilValue } from "recoil";
+import { beerDetailState } from "components/drink/beer/beerDetail/beerDetailAtom";
 
 const BeerDetail: React.FC = () => {
 
-  const router = useRouter();
-  const id = router.query.id;
+  const beerDetail = useRecoilValue(beerDetailState);
 
   return (
     <Layout title = "Beer">
       <div className="contents">
         <BeerHeader
-          title={id}
+          title={beerDetail.name}
           destination="beerList"
           buttonName="←一覧に戻る"/>
       </div>

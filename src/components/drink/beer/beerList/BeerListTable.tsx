@@ -4,6 +4,8 @@ import Image from 'next/image';
 import ReactStars from 'react-stars';
 import Pagination from 'components/common/Pagination';
 import { useRouter } from 'next/router';
+import { useRecoilState } from "recoil";
+import { beerDetailState } from "components/drink/beer/beerDetail/beerDetailAtom";
 
 
 interface BeerListTableProps {
@@ -14,12 +16,15 @@ interface BeerListTableProps {
 }
 
 const BeerListTable: React.FC<BeerListTableProps> = (props) => {
+  const [_, setBeerDetail] = useRecoilState(beerDetailState);
+
   const router = useRouter();
 
-  const openBeerDetail = (id: number) => {
+  const openBeerDetail = (beer: Beer) => {
+    setBeerDetail(beer);
+
     router.push({
-      pathname: "/drink/beer/beerDetail",
-      query: {id : id}
+      pathname: "/drink/beer/beerDetail"
     });
   }
 
@@ -43,7 +48,7 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
         <tbody>
           {(props.beerList || []).map((beer, count) => {
             return (
-              <tr key={"beerRanking" + (count + 1)} className="rankingTr" onClick={() => openBeerDetail(beer.id)}>
+              <tr key={"beerRanking" + (count + 1)} className="rankingTr" onClick={() => openBeerDetail(beer)}>
                 <td className="centerTd">{count + 1}</td>
                 <td className="imageTd">
                   {beer.infoUrl != null &&
