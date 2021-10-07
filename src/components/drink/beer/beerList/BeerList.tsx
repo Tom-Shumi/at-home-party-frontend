@@ -122,7 +122,7 @@ function createBeerList(responseData: any[]) {
 
   for (let i = 0 ; i < responseData.length ; i++) {
     beerList.push(new Beer(responseData[i]["id"], responseData[i]["name"], responseData[i]["description"], responseData[i]["drinkCategoryId1"], responseData[i]["drinkCategoryId2"]
-    , responseData[i]["infoUrl"], responseData[i]["alcohol"], responseData[i]["star"], responseData[i]["bitter"], responseData[i]["flavor"], responseData[i]["hop"]
+    , responseData[i]["infoUrl"], responseData[i]["imageUrl"], responseData[i]["alcohol"], responseData[i]["star"], responseData[i]["bitter"], responseData[i]["flavor"], responseData[i]["hop"]
     , responseData[i]["sharp"], responseData[i]["body"]))
   }
 

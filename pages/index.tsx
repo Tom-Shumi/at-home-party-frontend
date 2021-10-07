@@ -69,7 +69,7 @@ function createDrinkRankingList(responseData: any[]) {
 
   for (let i = 0 ; i < responseData.length ; i++) {
     drinkList.push(new DrinkType(responseData[i]["id"], responseData[i]["name"], responseData[i]["description"], responseData[i]["drinkCategoryId1"],
-                                  responseData[i]["drinkCategoryId2"], responseData[i]["infoUrl"], responseData[i]["alcohol"], responseData[i]["star"]))
+                                  responseData[i]["drinkCategoryId2"], responseData[i]["infoUrl"], responseData[i]["imageUrl"], responseData[i]["alcohol"], responseData[i]["star"]))
   }
 
   return drinkList;

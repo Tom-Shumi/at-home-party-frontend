@@ -30,9 +30,10 @@ const DrinkRankingTable: React.FC<DrinkRankingTableProps> = (props) => {
             <tr key={props.drinkTypeName + "Ranking" + (count + 1)} className={"rankingTr" + Constant.CSS_JOIN + color} >
               <td className="centerTd">{count + 1}</td>
               <td className="imageTd">
-                {drink.infoUrl != null &&
+                {drink.imageUrl != null &&
                   <Image key={props.drinkTypeName + "RankingImage" + (count + 1)}
-                  src={drink.infoUrl} alt={props.drinkTypeName + "RankingImage" + (count + 1)} width={75} height={75} />
+                    src={drink.imageUrl + Constant.IMAGE_SIZE_THUM} alt={props.drinkTypeName + "RankingImage" + (count + 1)}
+                    width={Constant.IMAGE_SIZE_PX_THUM} height={Constant.IMAGE_SIZE_PX_THUM} />
                 }
               </td>
               <td className={styles.nameTd}>{drink.name}</td>

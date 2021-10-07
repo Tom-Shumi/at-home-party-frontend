@@ -6,6 +6,7 @@ import Pagination from 'components/common/Pagination';
 import { useRouter } from 'next/router';
 import { useRecoilState } from "recoil";
 import { beerDetailState } from "components/drink/beer/beerDetail/BeerDetailAtom";
+import {Constant} from 'components/Constant';
 
 
 interface BeerListTableProps {
@@ -51,9 +52,10 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
               <tr key={"beerRanking" + (count + 1)} className="rankingTr" onClick={() => openBeerDetail(beer)}>
                 <td className="centerTd">{count + 1}</td>
                 <td className="imageTd">
-                  {beer.infoUrl != null &&
+                  {beer.imageUrl != null &&
                     <Image key={"beerRankingImage" + (count + 1)}
-                    src={beer.infoUrl} alt={"beerRankingImage" + (count + 1)} width={75} height={75} />
+                      src={beer.imageUrl + Constant.IMAGE_SIZE_THUM} alt={"beerRankingImage" + (count + 1)}
+                      width={Constant.IMAGE_SIZE_PX_THUM} height={Constant.IMAGE_SIZE_PX_THUM} />
                   }
                 </td>
                 <td>{beer.name}</td>

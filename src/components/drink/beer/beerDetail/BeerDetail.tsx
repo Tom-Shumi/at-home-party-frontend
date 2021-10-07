@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRecoilValue } from "recoil";
 import { beerDetailState } from "components/drink/beer/beerDetail/BeerDetailAtom";
+import {Constant} from 'components/Constant';
 
 
 const BeerDetail: React.FC = () => {
@@ -9,7 +10,8 @@ const BeerDetail: React.FC = () => {
 
   return (
     <>
-      <Image key="beerDetailImage" src={beerDetail.infoUrl} alt="beerDetailImage" width={70} height={70} />
+      <Image key="beerDetailImage" src={beerDetail.imageUrl + Constant.IMAGE_SIZE_M} alt="beerDetailImage"
+        width={Constant.IMAGE_SIZE_PX_M} height={Constant.IMAGE_SIZE_PX_M} />
     </>
   )
 }
