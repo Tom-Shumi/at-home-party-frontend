@@ -32,7 +32,7 @@ const DrinkRankingTable: React.FC<DrinkRankingTableProps> = (props) => {
               <td className="imageTd">
                 {drink.infoUrl != null &&
                   <Image key={props.drinkTypeName + "RankingImage" + (count + 1)}
-                  src={drink.infoUrl} alt={props.drinkTypeName + "RankingImage" + (count + 1)} width={70} height={70} />
+                  src={drink.infoUrl} alt={props.drinkTypeName + "RankingImage" + (count + 1)} width={75} height={75} />
                 }
               </td>
               <td className={styles.nameTd}>{drink.name}</td>

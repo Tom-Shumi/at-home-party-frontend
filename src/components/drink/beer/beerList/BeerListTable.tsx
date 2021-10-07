@@ -5,7 +5,7 @@ import ReactStars from 'react-stars';
 import Pagination from 'components/common/Pagination';
 import { useRouter } from 'next/router';
 import { useRecoilState } from "recoil";
-import { beerDetailState } from "components/drink/beer/beerDetail/beerDetailAtom";
+import { beerDetailState } from "components/drink/beer/beerDetail/BeerDetailAtom";
 
 
 interface BeerListTableProps {
@@ -53,7 +53,7 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
                 <td className="imageTd">
                   {beer.infoUrl != null &&
                     <Image key={"beerRankingImage" + (count + 1)}
-                    src={beer.infoUrl} alt={"beerRankingImage" + (count + 1)} width={70} height={70} />
+                    src={beer.infoUrl} alt={"beerRankingImage" + (count + 1)} width={75} height={75} />
                   }
                 </td>
                 <td>{beer.name}</td>
