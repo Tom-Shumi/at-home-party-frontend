@@ -4,7 +4,7 @@ import {apiClient} from 'utils/ApiUtils';
 import {createQueryString} from 'utils/ListApiUtils';
 import {env} from 'utils/EnvUtils';
 import Router from 'next/router';
-import {Button} from 'react-bootstrap';
+import {Button, Spinner} from 'react-bootstrap';
 import NoData from 'components/common/NoData';
 import BeerListTable from 'components/drink/beer/beerList/BeerListTable';
 import BeerDetailSearchModal from 'components/drink/beer/beerList/BeerDetailSearchModal';
@@ -21,6 +21,7 @@ const BeerList: React.FC = () => {
   const [detailSearchCondition, setDetailSearchCondition] = useState(initDetailSearchCondition());
   const [isDetailSearchModalOpen, setIsDetailSearchModalOpen] = useState<boolean>(false);
   const [currentSearchType, setCurrentSearchType] = useState<string>(Constant.SEARCH_TYPE_DEFAULT);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
@@ -56,6 +57,7 @@ const BeerList: React.FC = () => {
   }, [order]);
 
   const callFetchBeerList = (page: number = 0, searchType: string = Constant.SEARCH_TYPE_DEFAULT) => {
+    setIsLoading(true);
 
     if (searchType == Constant.SEARCH_TYPE_DEFAULT) {
       searchType = currentSearchType;
@@ -64,7 +66,10 @@ const BeerList: React.FC = () => {
     }
 
     const res: Promise<Beer[]> = fetchBeerList(page, searchType);
-    res.then(ret => setBeerList(ret));
+    res.then(ret => {
+      setBeerList(ret);
+      setIsLoading(false);
+    });
   }
 
   async function fetchBeerList(page: number, searchType: string) {
@@ -102,8 +107,9 @@ const BeerList: React.FC = () => {
             setDetailSearchCondition={setDetailSearchCondition} close={closeDetailSearchModal}/>}
       </div>
 
-      {isNoData || <BeerListTable beerList={beerList} currentPage={currentPage} maxPage={maxPage} paging={paging} />}
-      {isNoData && <NoData />}
+      {isLoading && <div className="spinnerDiv"><Spinner animation="border" variant="warning" /></div>}
+      {isLoading || isNoData || <BeerListTable beerList={beerList} currentPage={currentPage} maxPage={maxPage} paging={paging} />}
+      {isLoading || isNoData && <NoData />}
     </>
   )
 }

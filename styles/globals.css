@@ -44,7 +44,7 @@ a {
 }
 
 .contents {
-  padding: 10px 10% 0px 10%;
+  padding: 100px 10% 0px 10%;
 }
 
 .contentsLg {
@@ -185,4 +185,9 @@ a {
 
 .orderSelect {
   width: 175px;
+}
+
+.spinnerDiv {
+  text-align: center;
+  margin: 50px;
 }
