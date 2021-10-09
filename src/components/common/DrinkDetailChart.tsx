@@ -1,18 +1,20 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from "recharts";
+import {DrinkDetailChartData} from "types/DrinkDetailChart";
 
 
 interface DrinkDetailChartProps {
-
+  chartData: DrinkDetailChartData
 }
 
 const DrinkDetailChart: React.FC<DrinkDetailChartProps> = (props) => {
+
   const data = [
-    { rank: '国　語', value: 5 },
-    { rank: '数　学', value: 4 },
-    { rank: '理　科', value: 3 },
-    { rank: '社　会', value: 2 },
-    { rank: '英　語', value: 1 },
-    ];
+    { label: props.chartData.label1, value: props.chartData.value1 },
+    { label: props.chartData.label2, value: props.chartData.value2 },
+    { label: props.chartData.label3, value: props.chartData.value3 },
+    { label: props.chartData.label4, value: props.chartData.value4 },
+    { label: props.chartData.label5, value: props.chartData.value5 }
+  ];
 
   return (
     <RadarChart
@@ -24,13 +26,13 @@ const DrinkDetailChart: React.FC<DrinkDetailChartProps> = (props) => {
       data={data}
     >
       <PolarGrid/>
-      <PolarAngleAxis dataKey="rank" />
+      <PolarAngleAxis dataKey="label" />
       <PolarRadiusAxis angle={90} domain={[0, 5]} />
       <Radar
         name="janken"
         dataKey="value"
-        stroke="#8884d8"
-        fill="#8884d8"
+        stroke="#ffa500"
+        fill="#fffacd"
         fillOpacity={0.6}
       />
       <Tooltip />

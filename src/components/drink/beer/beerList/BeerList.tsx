@@ -10,6 +10,8 @@ import BeerListTable from 'components/drink/beer/beerList/BeerListTable';
 import BeerDetailSearchModal from 'components/drink/beer/beerList/BeerDetailSearchModal';
 import {Constant} from 'components/Constant';
 import BeerSortSelectBox from 'components/drink/beer/beerList/BeerSortSelectBox';
+import { useRecoilState } from "recoil";
+import { beerListConditionState } from "components/drink/beer/beerDetail/BeerDetailAtom";
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -23,12 +25,17 @@ const BeerList: React.FC = () => {
   const [currentSearchType, setCurrentSearchType] = useState<string>(Constant.SEARCH_TYPE_DEFAULT);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const [conditionState, setConditionState] = useRecoilState(beerListConditionState);
+
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
 
   // 初期表示用
   useEffect(() => {
-    callFetchBeerList();
+    if (conditionState.isBackDetail) {
+    } else {
+      callFetchBeerList();
+    }
   }, []);
 
   const paging = (page: number) => {

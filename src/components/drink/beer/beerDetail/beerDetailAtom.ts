@@ -1,7 +1,12 @@
 import { atom } from "recoil";
 import { Beer } from 'types/Beer';
 
-export const beerDetailState = atom<Beer>({
+export const beerDetailState = atom<Beer | null>({
     key: "beerDetail",
-    default: new Beer(-1, "", "", -1, -1, "", "", -1, -1, -1, -1, -1, -1, -1)
+    default: null
+});
+
+export const beerListConditionState = atom<{}>({
+    key: "beerListCondition",
+    default: {isBackDetail: false}
 });
