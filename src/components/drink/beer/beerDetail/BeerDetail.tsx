@@ -5,9 +5,7 @@ import {Constant} from 'components/Constant';
 import DrinkDetailChart from 'components/common/DrinkDetailChart';
 import {DrinkDetailChartData} from "types/DrinkDetailChart";
 
-
 const BeerDetail: React.FC = () => {
-
   const beerDetail = useRecoilValue(beerDetailState);
 
   const chartData = new DrinkDetailChartData( "苦　味", beerDetail!.bitter,

@@ -25,14 +25,20 @@ const BeerList: React.FC = () => {
   const [currentSearchType, setCurrentSearchType] = useState<string>(Constant.SEARCH_TYPE_DEFAULT);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [conditionState, setConditionState] = useRecoilState(beerListConditionState);
+  const [listConditionState, setListConditionState] = useRecoilState(beerListConditionState);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
 
   // 初期表示用
   useEffect(() => {
-    if (conditionState.isBackDetail) {
+    // 詳細画面から遷移してきた際に、遷移前の状態を復元する。
+    if (listConditionState != null && listConditionState.isBackDetail) {
+      setCurrentPage(listConditionState.page);
+      setCurrentSearchType(listConditionState.searchType);
+      setSearchedText(listConditionState.searchedText);
+      setDetailSearchCondition(listConditionState.detailSearchCondition);
+      setOrder(listConditionState.order);
     } else {
       callFetchBeerList();
     }
@@ -71,6 +77,13 @@ const BeerList: React.FC = () => {
     } else {
       setCurrentSearchType(searchType);
     }
+
+    setListConditionState({isBackDetail: false,
+                          searchType: searchType,
+                          searchedText: searchedText,
+                          detailSearchCondition: detailSearchCondition,
+                          order: order,
+                          page: page});
 
     const res: Promise<Beer[]> = fetchBeerList(page, searchType);
     res.then(ret => {
