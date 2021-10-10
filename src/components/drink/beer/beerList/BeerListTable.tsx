@@ -3,7 +3,7 @@ import { Beer } from 'types/Beer';
 import Image from 'next/image';
 import ReactStars from 'react-stars';
 import Pagination from 'components/common/Pagination';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useRecoilState } from "recoil";
 import { beerDetailState, beerListConditionState } from "components/drink/beer/beerDetail/BeerDetailAtom";
 import {Constant} from 'components/Constant';
@@ -20,15 +20,11 @@ const BeerListTable: React.FC<BeerListTableProps> = (props) => {
   const [_, setBeerDetail] = useRecoilState(beerDetailState);
   const [listConditionState, setListConditionState] = useRecoilState(beerListConditionState);
 
-  const router = useRouter();
-
   const openBeerDetail = (beer: Beer) => {
     setBeerDetail(beer);
     setListConditionState({...listConditionState, isBackDetail: true});
 
-    router.push({
-      pathname: "/drink/beer/beerDetail"
-    });
+    Router.push("/drink/beer/beerDetail");
   }
 
   return (

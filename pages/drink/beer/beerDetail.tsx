@@ -3,17 +3,14 @@ import BeerHeader from 'components/drink/beer/BeerHeader';
 import { useRecoilValue } from "recoil";
 import { beerDetailState } from "components/drink/beer/beerDetail/BeerDetailAtom";
 import BeerDetailComponent from "components/drink/beer/beerDetail/BeerDetail";
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 
 const BeerDetail: React.FC = () => {
-  const router = useRouter();
   const beerDetail = useRecoilValue(beerDetailState);
 
   // ブラウザ再読み込みした場合は一旦一覧に戻す
   if (beerDetail == null) {
-    router.push({
-      pathname: "/drink/beer/beerList"
-    });
+    Router.push('/drink/beer/beerList');
   }
 
   return (
