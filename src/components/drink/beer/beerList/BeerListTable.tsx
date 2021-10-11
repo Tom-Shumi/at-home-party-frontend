@@ -18,11 +18,11 @@ interface BeerListTableProps {
 
 const BeerListTable: React.FC<BeerListTableProps> = (props) => {
   const [_, setBeerDetail] = useRecoilState(beerDetailState);
-  const [listConditionState, setListConditionState] = useRecoilState(beerListConditionState);
+  const [listCondition, setListCondition] = useRecoilState(beerListConditionState);
 
   const openBeerDetail = (beer: Beer) => {
     setBeerDetail(beer);
-    setListConditionState({...listConditionState, isBackDetail: true});
+    setListCondition({...listCondition, isBackDetail: true});
 
     Router.push("/drink/beer/beerDetail");
   }

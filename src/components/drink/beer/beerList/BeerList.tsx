@@ -12,6 +12,7 @@ import {Constant} from 'components/Constant';
 import BeerSortSelectBox from 'components/drink/beer/beerList/BeerSortSelectBox';
 import { useRecoilState } from "recoil";
 import { beerListConditionState } from "components/drink/beer/beerDetail/BeerDetailAtom";
+import { defaultListCondition, ListCondition } from 'types/ListCondition';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
@@ -25,28 +26,31 @@ const BeerList: React.FC = () => {
   const [currentSearchType, setCurrentSearchType] = useState<string>(Constant.SEARCH_TYPE_DEFAULT);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [listConditionState, setListConditionState] = useRecoilState(beerListConditionState);
+  const [condition, setCondition] = useState<ListCondition>(defaultListCondition());
+
+  const [conditionRecoil, setConditionRecoil] = useRecoilState(beerListConditionState);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
-  const handleChangeOrder = () => (e: any) => setOrder(e.target.value);
+  const handleChangeOrder = () => (e: any) => {
+    setCurrentPage(0);
+    setOrder(e.target.value);
+  }
 
   // 初期表示用
   useEffect(() => {
     // 詳細画面から遷移してきた際に、遷移前の状態を復元する。
-    if (listConditionState != null && listConditionState.isBackDetail) {
-      setCurrentPage(listConditionState.page);
-      setCurrentSearchType(listConditionState.searchType);
-      setSearchedText(listConditionState.searchedText);
-      setDetailSearchCondition(listConditionState.detailSearchCondition);
-      setOrder(listConditionState.order);
+    if (conditionRecoil != null && conditionRecoil.isBackDetail) {
+      setUseState(conditionRecoil);
+      callFetchBeerList(conditionRecoil.page, conditionRecoil.searchType,
+        conditionRecoil.searchedText, conditionRecoil.detailSearchCondition, conditionRecoil.order);
     } else {
-      callFetchBeerList();
+      callFetchBeerList(currentPage, currentSearchType, searchedText, detailSearchCondition, order)
     }
   }, []);
 
   const paging = (page: number) => {
     setCurrentPage(page)
-    callFetchBeerList(page)
+    callFetchBeerList(page, currentSearchType, searchedText, detailSearchCondition, order)
   }
 
   const searchBeerList = () => {
@@ -55,21 +59,21 @@ const BeerList: React.FC = () => {
 
   // 商品名検索用
   useEffect(() => {
-    callFetchBeerList(0, Constant.SEARCH_TYPE_DRINK_NAME);
+    callFetchBeerList(0, Constant.SEARCH_TYPE_DRINK_NAME, searchedText, detailSearchCondition, order);
   }, [searchedText]);
 
   // 詳細検索用
   useEffect(() => {
-    callFetchBeerList(0, Constant.SEARCH_TYPE_DETAIL);
+    callFetchBeerList(0, Constant.SEARCH_TYPE_DETAIL, searchedText, detailSearchCondition, order);
     closeDetailSearchModal();
   }, [detailSearchCondition]);
 
   // 並び替え用
   useEffect(() => {
-    callFetchBeerList();
+    callFetchBeerList(0, currentSearchType, searchedText, detailSearchCondition, order);
   }, [order]);
 
-  const callFetchBeerList = (page: number = 0, searchType: string = Constant.SEARCH_TYPE_DEFAULT) => {
+  const callFetchBeerList = (page: number, searchType: string, searchedText: string, detailSearchCondition: any, order: string) => {
     setIsLoading(true);
 
     if (searchType == Constant.SEARCH_TYPE_DEFAULT) {
@@ -78,21 +82,22 @@ const BeerList: React.FC = () => {
       setCurrentSearchType(searchType);
     }
 
-    setListConditionState({isBackDetail: false,
+    setConditionRecoil({isBackDetail: false,
                           searchType: searchType,
                           searchedText: searchedText,
                           detailSearchCondition: detailSearchCondition,
                           order: order,
+                          maxPage: maxPage,
                           page: page});
 
-    const res: Promise<Beer[]> = fetchBeerList(page, searchType);
+    const res: Promise<Beer[]> = fetchBeerList(page, searchType, searchedText, detailSearchCondition, order);
     res.then(ret => {
       setBeerList(ret);
       setIsLoading(false);
     });
   }
 
-  async function fetchBeerList(page: number, searchType: string) {
+  async function fetchBeerList(page: number, searchType: string, searchedText: string, detailSearchCondition: any, order: string) {
 
     const queryString: string = createQueryString(page, searchType, searchedText, detailSearchCondition, order);
 
@@ -106,6 +111,15 @@ const BeerList: React.FC = () => {
       Router.push('/error');
       return [];
     }
+  }
+
+  const setUseState = (listCondition: ListCondition) => {
+    setCurrentPage(listCondition.page);
+    setCurrentSearchType(listCondition.searchType);
+    setSearchedText(listCondition.searchedText);
+    setDetailSearchCondition(listCondition.detailSearchCondition);
+    setOrder(listCondition.order);
+    setMaxPage(listCondition.maxPage)
   }
 
   const openDetailSearchModal = () => setIsDetailSearchModalOpen(true);

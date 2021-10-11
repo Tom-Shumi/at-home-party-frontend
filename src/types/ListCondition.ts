@@ -1,13 +1,16 @@
-export class ListConditionState {
+import { Constant } from "components/Constant";
+
+export class ListCondition {
   isBackDetail: boolean;
   searchType: string;
   searchedText: string;
   detailSearchCondition: any;
   order: string;
   page: number;
+  maxPage: number;
 
   constructor(isBackDetail: boolean, searchType: string, searchedText: string,
-    detailSearchCondition: any, order: string, page: number) {
+    detailSearchCondition: any, order: string, page: number, maxPage: number) {
 
       this.isBackDetail = isBackDetail;
       this.searchType = searchType;
@@ -15,15 +18,17 @@ export class ListConditionState {
       this.detailSearchCondition = detailSearchCondition;
       this.order = order;
       this.page = page;
+      this.maxPage = maxPage;
     }
 }
 
-export const defaultListConditionState = (): ListConditionState => {
+export const defaultListCondition = (): ListCondition => {
   return {isBackDetail: false,
-          searchType: "SEARCH_TYPE_DETAIL",
+          searchType: Constant.SEARCH_TYPE_DEFAULT,
           searchedText: "",
           detailSearchCondition: null,
           order: "",
-          page: 0
+          page: 0,
+          maxPage: 0
   };
 }
