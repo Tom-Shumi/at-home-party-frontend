@@ -7,13 +7,13 @@ import FeatureScoreTextBox from 'components/common/DetailSearchModal/FeatureScor
 import {initDetailSearchCondition} from 'components/drink/beer/beerList/BeerList'
 
 interface BeerDetailSearchModalProps {
-  detailSearchCondition: any;
-  setDetailSearchCondition: Dispatch<SetStateAction<any>>;
+  condition: any;
+  setCondition: Dispatch<SetStateAction<any>>;
   close: () => void;
 }
 
 const BeerDetailSearchModal: React.FC<BeerDetailSearchModalProps> = (props) => {
-  const [tempDetailSearchCondition, setTempDetailSearchCondition] = useState(props.detailSearchCondition);
+  const [tempDetailSearchCondition, setTempDetailSearchCondition] = useState(props.condition.detailSearchCondition);
 
   const handleInput = (input: string) => {
     return (e: { target: { value: any; }; }) => setTempDetailSearchCondition({...tempDetailSearchCondition, [input]: e.target.value})
@@ -21,7 +21,7 @@ const BeerDetailSearchModal: React.FC<BeerDetailSearchModalProps> = (props) => {
 
   const setDetailSearchCondition = () => {
     const copyDetailSearchCondition = {...tempDetailSearchCondition};
-    props.setDetailSearchCondition(copyDetailSearchCondition)
+    props.setCondition({...props.condition, detailSearchCondition: copyDetailSearchCondition})
   };
   const clearDetailSearchCondition = () => setTempDetailSearchCondition(initDetailSearchCondition);
 

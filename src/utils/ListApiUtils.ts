@@ -1,20 +1,23 @@
 import {Constant} from 'components/Constant';
+import { ListCondition } from 'types/ListCondition';
 
-export const createQueryString = (page: number, searchType: string, searchedText: string, detailSearchCondition: any, order: string): string => {
+export const createQueryString = (condition: ListCondition): string => {
 
-  const pageQuery = `?page=${page}`
+  const pageQuery = `?page=${condition.page}`
 
   let drinkNameQuery = "";
-  if (searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
-    drinkNameQuery = searchedText == "" ? "" : `&drinkName=${searchedText}`;
+  if (condition.searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
+    drinkNameQuery = condition.detailSearchCondition.searchedText == ""
+                        ? ""
+                        : `&drinkName=${condition.detailSearchCondition.searchedText}`;
   }
 
   let detailSearchQuery = "";
-  if (searchType == Constant.SEARCH_TYPE_DETAIL) {
-    detailSearchQuery = createDetailSearchQuery(detailSearchCondition);
+  if (condition.searchType == Constant.SEARCH_TYPE_DETAIL) {
+    detailSearchQuery = createDetailSearchQuery(condition.detailSearchCondition);
   }
 
-  const orderQuery = createOrderQuery(order);
+  const orderQuery = createOrderQuery(condition.order);
 
   return `${pageQuery}${drinkNameQuery}${detailSearchQuery}${orderQuery}`;
 }
