@@ -6,17 +6,15 @@ export class ListCondition {
   detailSearchCondition: any;
   order: string;
   page: number;
-  maxPage: number;
 
   constructor(isBackDetail: boolean, searchType: string, detailSearchCondition: any
-    , order: string, page: number, maxPage: number) {
+    , order: string, page: number) {
 
       this.isBackDetail = isBackDetail;
       this.searchType = searchType;
       this.detailSearchCondition = detailSearchCondition;
       this.order = order;
       this.page = page;
-      this.maxPage = maxPage;
     }
 }
 
@@ -25,7 +23,6 @@ export const defaultListCondition = (): ListCondition => {
           searchType: Constant.SEARCH_TYPE_DEFAULT,
           detailSearchCondition: null,
           order: "",
-          page: 0,
-          maxPage: 0
+          page: 0
   };
 }

@@ -16,10 +16,12 @@ import { defaultListCondition, ListCondition } from 'types/ListCondition';
 
 const BeerList: React.FC = () => {
   const [beerList, setBeerList] = useState<Beer[]>([]);
+  const [maxPage, setMaxPage] = useState<number>(0);
   const [searchText, setSearchText] = useState<string>(""); // テキストボックス内の文字列
   const [isDetailSearchModalOpen, setIsDetailSearchModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [condition, setCondition] = useState<ListCondition>(defaultListCondition());
+
   const [conditionRecoil, setConditionRecoil] = useRecoilState(beerListConditionState);
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
@@ -31,6 +33,9 @@ const BeerList: React.FC = () => {
   useEffect(() => {
     // 詳細画面から遷移してきた際に、遷移前の状態を復元する。
     if (conditionRecoil != null && conditionRecoil.isBackDetail) {
+      setSearchText(conditionRecoil.detailSearchCondition == null
+                                                            ? ""
+                                                            : conditionRecoil.detailSearchCondition.drinkName)
       setCondition(conditionRecoil);
     } else {
       callFetchBeerList(condition)
@@ -47,7 +52,6 @@ const BeerList: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(condition)
     callFetchBeerList(condition);
   }, [condition]);
 
@@ -70,8 +74,7 @@ const BeerList: React.FC = () => {
     try {
       const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`));
 
-      // TODO
-      // setCondition({...condition, maxPage: res.data.maxPage});
+      setMaxPage(res.data.maxPage);
       return createBeerList(res.data.beerList);
 
     } catch(error){
@@ -100,7 +103,7 @@ const BeerList: React.FC = () => {
       </div>
 
       {isLoading && <div className="spinnerDiv"><Spinner animation="border" variant="warning" /></div>}
-      {isLoading || isNoData || <BeerListTable beerList={beerList} currentPage={condition.page} maxPage={condition.maxPage} paging={paging} />}
+      {isLoading || isNoData || <BeerListTable beerList={beerList} currentPage={condition.page} maxPage={maxPage} paging={paging} />}
       {isLoading || isNoData && <NoData />}
     </>
   )
