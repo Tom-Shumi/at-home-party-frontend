@@ -4,16 +4,15 @@ import { ListCondition } from 'types/ListCondition';
 export const createQueryString = (condition: ListCondition): string => {
 
   const pageQuery = `?page=${condition.page}`
-
   let drinkNameQuery = "";
-  if (condition.searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
-    drinkNameQuery = condition.detailSearchCondition.searchedText == ""
+  if (condition.detailSearchCondition.searchType == Constant.SEARCH_TYPE_DRINK_NAME) {
+    drinkNameQuery = condition.detailSearchCondition.drinkName == ""
                         ? ""
-                        : `&drinkName=${condition.detailSearchCondition.searchedText}`;
+                        : `&drinkName=${condition.detailSearchCondition.drinkName}`;
   }
 
   let detailSearchQuery = "";
-  if (condition.searchType == Constant.SEARCH_TYPE_DETAIL) {
+  if (condition.detailSearchCondition.searchType == Constant.SEARCH_TYPE_DETAIL) {
     detailSearchQuery = createDetailSearchQuery(condition.detailSearchCondition);
   }
 
@@ -25,7 +24,7 @@ export const createQueryString = (condition: ListCondition): string => {
 export const createOrderQuery = (order: string) => {
   let orderQuery = "";
 
-  if (order != "") {
+  if (order != null && order != "") {
     const orderArr = order.split("_");
     const orderType = orderArr[0];
     const isDesc = orderArr[1] == "DESC" ? true : false;

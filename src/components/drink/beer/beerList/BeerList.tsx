@@ -20,7 +20,7 @@ const BeerList: React.FC = () => {
   const [searchText, setSearchText] = useState<string>(""); // テキストボックス内の文字列
   const [isDetailSearchModalOpen, setIsDetailSearchModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [condition, setCondition] = useState<ListCondition>(defaultListCondition());
+  const [condition, setCondition] = useState<ListCondition>(initCondition());
 
   const [conditionRecoil, setConditionRecoil] = useRecoilState(beerListConditionState);
 
@@ -37,7 +37,11 @@ const BeerList: React.FC = () => {
                                                             ? ""
                                                             : conditionRecoil.detailSearchCondition.drinkName)
       setCondition(conditionRecoil);
+
+      console.log("back")
+
     } else {
+      console.log("init")
       callFetchBeerList(condition)
     }
   }, []);
@@ -48,10 +52,13 @@ const BeerList: React.FC = () => {
 
   const searchBeerList = () => {
     const detailSearchCondition = {...condition.detailSearchCondition, drinkName: searchText, searchType: Constant.SEARCH_TYPE_DRINK_NAME};
+
     setCondition({...condition, detailSearchCondition: detailSearchCondition});
   }
 
   useEffect(() => {
+    console.log("useEffect")
+    setIsDetailSearchModalOpen(false);
     callFetchBeerList(condition);
   }, [condition]);
 
@@ -72,6 +79,9 @@ const BeerList: React.FC = () => {
     const queryString: string = createQueryString(condition);
 
     try {
+
+      console.log(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`);
+
       const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`));
 
       setMaxPage(res.data.maxPage);
@@ -111,6 +121,11 @@ const BeerList: React.FC = () => {
 
 export default BeerList
 
+function initCondition() {
+  const condition = defaultListCondition()
+  condition.detailSearchCondition = initDetailSearchCondition();
+  return condition;
+}
 
 export function initDetailSearchCondition() {
   return {drinkName: "", starFrom: "", starTo: "", alcoholFrom: "", alcoholTo: "", bitterFrom: "", bitterTo: "",

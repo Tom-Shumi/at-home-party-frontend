@@ -191,3 +191,13 @@ a {
   text-align: center;
   margin: 50px;
 }
+
+.detailStarDiv {
+  display: flex;
+  margin: 10px 0px 0px 30px;
+}
+
+.detailStarLabel {
+  margin: 5px 0px 0px 15px;
+  font-size: 20px;
+}

@@ -18,14 +18,15 @@ const BeerDetail: React.FC = () => {
     <Layout title = "Beer">
       <div className="contents">
         <BeerHeader title={beerDetail!.name} destination="beerList" buttonName="←一覧に戻る">
-          <div>
+          <div className="detailStarDiv">
             <ReactStars
               count={5}
               value={beerDetail!.star}
               size={24}
               color1={'#d3d3d3'}
               color2={'#ffd700'}
-              edit={false} />{beerDetail!.star}
+              edit={false} />
+            <label className="detailStarLabel">{beerDetail!.star} 点</label>
           </div>
         </BeerHeader>
         <BeerDetailComponent />
