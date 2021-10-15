@@ -26,7 +26,7 @@ const BeerList: React.FC = () => {
 
   const handleChangeSearchText = () => (e: any) => setSearchText(e.target.value);
   const handleChangeOrder = () => (e: any) => {
-    setCondition({...condition, page: 0, order: e.target.value})
+    setCondition({...condition, page: 0, order: e.target.value, displayFlg: true})
   }
 
   // 初期表示用
@@ -37,29 +37,26 @@ const BeerList: React.FC = () => {
                                                             ? ""
                                                             : conditionRecoil.detailSearchCondition.drinkName)
       setCondition(conditionRecoil);
-
-      console.log("back")
-
     } else {
-      console.log("init")
-      callFetchBeerList(condition)
+      callFetchBeerList({...condition, displayFlg: true})
     }
   }, []);
 
   const paging = (page: number) => {
-    setCondition({...condition, page: page})
+    setCondition({...condition, page: page, displayFlg: true})
   }
 
   const searchBeerList = () => {
     const detailSearchCondition = {...condition.detailSearchCondition, drinkName: searchText, searchType: Constant.SEARCH_TYPE_DRINK_NAME};
 
-    setCondition({...condition, detailSearchCondition: detailSearchCondition});
+    setCondition({...condition, detailSearchCondition: detailSearchCondition, displayFlg: true});
   }
 
   useEffect(() => {
-    console.log("useEffect")
     setIsDetailSearchModalOpen(false);
-    callFetchBeerList(condition);
+    if (condition.displayFlg) {
+      callFetchBeerList(condition);
+    }
   }, [condition]);
 
   const callFetchBeerList = (condition: ListCondition) => {
@@ -79,8 +76,6 @@ const BeerList: React.FC = () => {
     const queryString: string = createQueryString(condition);
 
     try {
-
-      console.log(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`);
 
       const res = await apiClient().get(env(`${process.env.NEXT_PUBLIC_API_DRINK_BEER}${queryString}`));
 

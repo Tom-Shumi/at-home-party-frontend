@@ -21,7 +21,7 @@ const BeerDetailSearchModal: React.FC<BeerDetailSearchModalProps> = (props) => {
 
   const setDetailSearchCondition = () => {
     const copyDetailSearchCondition = {...tempDetailSearchCondition};
-    props.setCondition({...props.condition, page: 0, detailSearchCondition: copyDetailSearchCondition})
+    props.setCondition({...props.condition, page: 0, detailSearchCondition: copyDetailSearchCondition, displayFlg: true})
   };
   const clearDetailSearchCondition = () => setTempDetailSearchCondition(initDetailSearchCondition);
 
