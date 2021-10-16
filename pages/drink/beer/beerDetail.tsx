@@ -15,7 +15,7 @@ const BeerDetail: React.FC = () => {
     <>
       {beeDetailExistsFlg && <ErrorComponent />}
       {beeDetailExistsFlg ||
-          <Layout title = "Beer">
+        <Layout title = "Beer">
           <div className="contents">
             <BeerHeader title={beerDetail!.name} destination="beerList" buttonName="←一覧に戻る">
               <div className="detailStarDiv">
